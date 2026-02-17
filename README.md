@@ -3,7 +3,21 @@ A development practical test for client and contact information.
 
 ## 🗓️ Delivery Target: 19 February 2026 at 08h00
 
-## ✅ Screens
+## 🖥️ Screens
+
+### 🏢 Clients Screen
+- View all registered clients
+- Add new client
+- Edit existing client details
+- Delete client
+- Search and filter clients
+
+### 👤 Contacts Screen
+- View contacts linked to a client
+- Add new contact to a client
+- Edit contact details
+- Delete contact
+- Filter contacts by client
 
 ## 🚀 Tech Stack 
 - Backend: ASP.NET Core 8
