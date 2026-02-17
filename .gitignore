@@ -53,3 +53,6 @@ dkms.conf
 
 # debug information files
 *.dwo
+/Source/.vs
+/Source/ClientHubPortal/bin
+/Source/ClientHubDatabase/bin
