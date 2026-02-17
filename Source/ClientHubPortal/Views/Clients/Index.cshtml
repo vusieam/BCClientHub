@@ -1,0 +1,159 @@
+﻿@model IEnumerable<ClientViewModel>;
+@{
+    ViewData["Title"] = "Clients Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<button class="btn btn-primary" id="alertDemo">
+    Add Client
+</button>
+
+<div class="card">
+    <div class="card-header">
+        <h4 class="card-title align-middle mb-0 mt-2 fw-bold text-uppercase text-primary">List of Registered Clients</h4>
+        <div class="float-end">
+            @* <button type="button" class="btn btn-outline-primary me-5" onclick="history.back();">
+                <i class="bi bi-sign-turn-left me-1"></i>
+                <span class="text-uppercase">Back</span>
+            </button> *@
+
+            <button class="btn btn-md btn-outline-primary float-end" id="openClientModal">
+                <span class="me-2">Add Client</span>
+                @* <i class="bi bi-person-fill-add"></i> *@
+                <i class="bx bx-book-add bx-sm"></i>
+            </button>
+        </div>
+    </div>
+
+    <div class="card-body">
+        <table id="table1" class="table table-bordered table-striped">
+            @if (!Model.Any())
+            {
+                <tbody class="text-center">  No client(s) found.  </tbody>
+            }
+            else
+            {
+                <thead>
+                    <tr class="text-center text-uppercase">
+                        <th>@Html.DisplayNameFor(model => model.Name)</th>
+                        <th>@Html.DisplayNameFor(model => model.NameCode)</th>
+                        <th>@Html.DisplayNameFor(model => model.NoOfContacts)</th>
+                        @* <th>@Html.DisplayNameFor(model => model.CreatedAt)</th> *@
+                        <th>@Html.DisplayNameFor(model => model.DeletedAt)</th>
+                        <th style="max-width:200px !important;">Options</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="align-middle text-start">@Html.DisplayFor(modelItem => item.Name)</td>
+                            <td class="align-middle text-start">@Html.DisplayFor(modelItem => item.NameCode)</td>
+                            <td class="align-middle text-center">@Html.DisplayFor(modelItem => item.NoOfContacts)</td>
+                            @* <td>@Html.DisplayFor(modelItem => item.CreatedAt)</td> *@
+                            <td class="text-center">
+                                @if (item.DeletedAt == null || item.DeletedAt == DateTime.MinValue)
+                                {
+                                    <button type="button" class="btn btn-success pe-2 ps-2" style="min-width:130px !important;">
+                                        <span class="text-uppercase me-2">ACTIVE</span>
+                                        <i class='bx bxs-check-shield bx-sm float-end'></i>
+                                    </button>
+                                }
+                                else
+                                {
+                                    <button type="button" class="btn btn-danger pe-3 ps-3" style="min-width:130px !important;">
+                                        <span class="text-uppercase me-2">DELETED</span>
+                                        <i class='bx bxs-shield-x bx-sm float-end'></i>
+                                    </button>
+                                }
+                            </td>
+                            <td class="text-center">
+
+                                <button type="button" class="btn btn-outline-danger me-2 mb-2" title="Delete">
+                                    <i class='bx bx-trash bx-sm'></i>
+                                </button>
+
+                                <button class="btn btn-info me-2 mb-2" title="View Details">
+                                    @* <i class='bx bx-detail bx-sm'></i> *@
+                                    <i class="bx bx-file-detail bx-sm"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            }
+        </table>
+    </div>
+</div>
+
+<div id="modalContainer"></div>
+
+@section Scripts {
+
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+
+        const Toast = Swal.mixin({
+                toast: true,
+                position: "top-end",
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.onmouseenter = Swal.stopTimer;
+                    toast.onmouseleave = Swal.resumeTimer;
+                }
+            });
+
+        $("#openClientModal").click(function () {
+            $.get("/Clients/CreateModal", function (data) {
+                $("#modalContainer").html(data);
+                var modal = new bootstrap.Modal(document.getElementById('addClientModal'));
+                modal.show();
+            });
+        });
+
+
+
+        $("#alertDemo").click(function(){
+            Toast.fire({
+              icon: "success",
+              title: "Signed in successfully"
+            });
+        });
+
+
+        $(document).on("submit", "#clientForm", function (e) {
+            e.preventDefault();
+
+            if (!$(this).valid()) return;
+
+            $.ajax({
+                url: '/Clients/CreateAjax',
+                type: 'POST',
+                data: $(this).serialize(),
+                success: function (data) {
+                    let content = data;
+                    debugger;
+                    if(data.status){
+                        Toast.fire({
+                          icon: "success",
+                          title: data.statusMessage
+                        });
+                        location.reload(); // or append row dynamically
+                    }
+                    else{
+                        Toast.fire({
+                          icon: "error",
+                          title: data.statusMessage
+                        });
+                    }
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            });
+        });
+    </script>
+}

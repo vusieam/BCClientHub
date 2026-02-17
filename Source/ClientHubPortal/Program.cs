@@ -1,4 +1,6 @@
 using ClientHubDatabase;
+using ClientHubDatabase.Migrations;
+using ClientHubPortal.Services;
 using Microsoft.Data.SqlClient;
 using System.Data;
 
@@ -7,17 +9,20 @@ var builder = WebApplication.CreateBuilder(args);
 
 #region -- database context --
 builder.Services.AddSingleton<ClientHubDbContext>();
-//builder.Services.AddSingleton<BootstraperService>();
+builder.Services.AddSingleton<SqlFileProvider>();
+builder.Services.AddSingleton<BootstraperService>();
 //builder.Services.AddScoped<IDbConnection>(sp => new SqlConnection(builder.Configuration.GetConnectionString("DefaultConnection")));
 #endregion
 
 
 #region -- repositories --
+builder.Services.AddSingleton<IClientRepository, ClientRepository>();
 
 #endregion
 
 
 #region -- services --
+builder.Services.AddSingleton<IClientService, ClientService>();
 
 #endregion
 
@@ -25,11 +30,6 @@ builder.Services.AddSingleton<ClientHubDbContext>();
 builder.Services.AddControllersWithViews();
 
 
-#region -- swagger configuration --
-builder.Services.AddRouting(options => options.LowercaseUrls = true);
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-#endregion
 
 var app = builder.Build();
 
@@ -41,6 +41,10 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+
+var boostrapper = app.Services.GetRequiredService<BootstraperService>();
+await boostrapper.Migrations();
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
@@ -50,6 +54,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Clients}/{action=Index}/{id?}");
 
 app.Run();

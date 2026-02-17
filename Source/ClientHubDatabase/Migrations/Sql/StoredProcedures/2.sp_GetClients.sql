@@ -1,0 +1,11 @@
+CREATE OR ALTER PROC dbo.sp_GetClients
+WITH ENCRYPTION
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+	SELECT * 
+	FROM dbo.vw_AllClients C WITH(NOLOCK)
+	ORDER BY C.Name
+
+END

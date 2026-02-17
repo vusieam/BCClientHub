@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ClientHubDatabase")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3c894f885f95671cfde9f9e0e0b7fa7fdc7d504a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a070eb6bba2bbb8d51c4609166caf98dc9de0c90")]
 [assembly: System.Reflection.AssemblyProductAttribute("ClientHubDatabase")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ClientHubDatabase")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

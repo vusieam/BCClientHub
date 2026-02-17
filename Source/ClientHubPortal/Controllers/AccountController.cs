@@ -4,11 +4,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ClientHubPortal.Controllers
 {
-    public class HomeController : Controller
+    public class AccountController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<AccountController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public AccountController(ILogger<AccountController> logger)
         {
             _logger = logger;
         }

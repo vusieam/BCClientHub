@@ -7,14 +7,27 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Data.SqlClient" Version="6.0.2" />
-    <PackageReference Include="Dapper" Version="2.1.35" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="8.0.0" />
+    <None Remove="Migrations\Sql\StoredProcedures\1.sp_CreateClient.sql" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\" />
-    <Folder Include="Repositories\" />
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="6.0.2" />
+    <PackageReference Include="Dapper" Version="2.1.35" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\Sql\StoredProcedures\2.sp_GetClients.sql" />
+    <EmbeddedResource Include="Migrations\Sql\StoredProcedures\1.sp_CreateClient.sql" />
+    <EmbeddedResource Include="Migrations\Sql\Tables\01.Statuses.sql" />
+    <EmbeddedResource Include="Migrations\Sql\Tables\05.ClientCodeSequence.sql" />
+    <EmbeddedResource Include="Migrations\Sql\Tables\04.ClientContacts.sql" />
+    <EmbeddedResource Include="Migrations\Sql\Tables\03.Contacts.sql" />
+    <EmbeddedResource Include="Migrations\Sql\Tables\02.Clients.sql" />
+    <EmbeddedResource Include="Migrations\Sql\Triggers\01.trg_generate_client_code.sql" />
+    <EmbeddedResource Include="Migrations\Sql\Views\1.vw_AllClients.sql" />
   </ItemGroup>
 
 </Project>
