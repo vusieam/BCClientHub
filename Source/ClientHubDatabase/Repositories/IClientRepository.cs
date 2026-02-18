@@ -5,6 +5,7 @@ public interface IClientRepository
     #region ----------------- Clients Section -----------------
 
     Task<GenericResponse> CreateClientAsync(Clients model);
+    Task<GenericResponse> DeleteClientAsync(Guid clientId);
     Task<GenericResponse<IEnumerable<Clients>>> GetClientsAsync();
 
     #endregion

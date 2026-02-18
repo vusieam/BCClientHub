@@ -8,6 +8,7 @@ public interface IClientService
     #region ----------------- Clients Section -----------------
 
     Task<GenericResponse> CreateClientAsync(ClientViewModel model);
+    Task<GenericResponse> DeleteClientAsync(Guid clientId);
     Task<GenericResponse<List<ClientViewModel>>> GetClientsAsync();
 
     #endregion

@@ -48,12 +48,20 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50c1xfQ3JlYXRlQ2xpZW50TW9kYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/DEV/Personal/Interview/BinaryCity/BCClientHub/Source/ClientHubPortal/Views/Contacts/Contacts.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udGFjdHNcQ29udGFjdHMuY3NodG1s
+[C:/DEV/Personal/Interview/BinaryCity/BCClientHub/Source/ClientHubPortal/Views/Contacts/ContactDetails.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udGFjdHNcQ29udGFjdERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/DEV/Personal/Interview/BinaryCity/BCClientHub/Source/ClientHubPortal/Views/Contacts/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udGFjdHNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/DEV/Personal/Interview/BinaryCity/BCClientHub/Source/ClientHubPortal/Views/Contacts/_ContactClientsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udGFjdHNcX0NvbnRhY3RDbGllbnRzUGFydGlhbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/DEV/Personal/Interview/BinaryCity/BCClientHub/Source/ClientHubPortal/Views/Contacts/_ContactDetailsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udGFjdHNcX0NvbnRhY3REZXRhaWxzUGFydGlhbC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/DEV/Personal/Interview/BinaryCity/BCClientHub/Source/ClientHubPortal/Views/Contacts/_CreateContactModal.cshtml]

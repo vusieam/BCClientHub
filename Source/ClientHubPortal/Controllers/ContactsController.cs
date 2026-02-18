@@ -45,6 +45,46 @@ public class ContactsController : Controller
         return PartialView("_CreateContactModal", new ContactViewModel());
     }
 
+
+
+
+
+    [HttpGet]
+    public async Task<IActionResult> ContactDetailsAsync(Guid Id)
+    {
+        //ViewBag.Header = $"Clients";
+        ViewBag.CurrentHeader = $"Contact Details";
+        var envelopeResponse = await clientService.GetContactsAsync();
+        var client = envelopeResponse.Data.FirstOrDefault(f => f.Id == Id);
+        if (client == null)
+            return View();
+        return View(client);
+    }
+
+
+    [HttpGet]
+    public async Task<IActionResult> ContactInfoAsync(Guid contactId)
+    {
+        //ViewBag.Header = $"Clients";
+        ViewBag.CurrentHeader = $"Contact Details";
+        var envelopeResponse = await clientService.GetContactsAsync();
+        var client = envelopeResponse.Data.FirstOrDefault(f => f.Id == contactId);
+        return PartialView("_ContactDetailsPartial", client);
+    }
+
+
+
+    [HttpGet]
+    public async Task<IActionResult> GetClientContactsAsync(Guid clientId)
+    {
+        //ViewBag.Header = $"Clients";
+        ViewBag.CurrentHeader = $"Contact Details";
+        var envelopeResponse = await clientService.GetClientContactsAsync(clientId);
+        var clientContacts = envelopeResponse.Data;
+        return PartialView("_ContactClientsPartial", clientContacts);
+    }
+
+
     #endregion
 
 

@@ -95,5 +95,14 @@ public class ClientsController : Controller
         return Json(apiResponse);
     }
 
+
+
+    [HttpPost]
+    public async Task<IActionResult> DeleteClientAsync(Guid clientId)
+    {
+        var apiResponse = await clientService.DeleteClientAsync(clientId);
+        return Json(apiResponse);
+    }
+
     #endregion
 }

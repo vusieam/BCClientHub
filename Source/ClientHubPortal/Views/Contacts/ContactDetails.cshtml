@@ -1,0 +1,136 @@
+﻿@model ContactViewModel;
+@{
+    ViewData["Title"] = "Contact Details Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card">
+    <div class="card-header">
+        <h4 class="card-title align-middle mb-0 fw-bold text-uppercase">Contact Details</h4>
+        <div class="float-end">
+            <button type="button" class="btn btn-sm btn-outline-info me-3" onclick="history.back();">
+                <i class="bx bx-undo bx-sm me-1"></i>
+                <span class="me-1">Back</span>
+            </button>
+
+            <button class="btn btn-sm  btn-primary float-end" id="openClientModal" onclick="openContactsModal('@Model.Id')">
+                <span class="me-1 mt-1">Link Existing Client</span>
+                <i class="bx bx-book-add bx-sm"></i>
+            </button>
+
+        </div>
+    </div>
+    <div class="card-body">
+        <ul class="nav nav-tabs" id="contactsTabs" role="tablist">
+            <li class="nav-item">
+                <button class="nav-link active"
+                        data-url="@Url.Action("ContactInfo")"
+                        data-target="#contactDetailsTab"
+                        data-bs-toggle="tab"
+                        data-bs-target="#contactDetailsTab"
+                        data-contact-id="@Model.Id"
+                        type="button">
+                    General
+                </button>
+            </li>
+
+
+            <li class="nav-item">
+                <button class="nav-link"
+                        id="pending-tab"
+                        data-bs-toggle="tab"
+                        data-bs-target="#clientsTab"
+                        data-url="@Url.Action("GetContactClients")"
+                        data-contact-id="@Model.Id"
+                        type="button">
+                    Client(s)
+                </button>
+            </li>
+
+        </ul>
+
+        <div class="tab-content border border-top-0 p-3">
+            <div class="tab-pane fade show active" id="contactDetailsTab"></div>
+            <div class="tab-pane fade" id="clientsTab"></div>
+        </div>
+    </div>
+
+</div>
+
+
+<div id="modalContainer"></div>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const tabs = document.querySelectorAll('#contactsTabs button');
+
+            function loadTab(button) {
+                debugger;
+
+                const url = button.getAttribute("data-url");
+                const contactId = button.getAttribute("data-contact-id");
+                const targetSelector = button.getAttribute("data-bs-target");
+                const target = document.querySelector(targetSelector);
+
+                target.innerHTML = `
+                    <div class="text-center p-4">
+                        <div class="spinner-border"></div>
+                    </div>
+                `;
+
+                let fullUrl = url;
+
+                if (contactId) {
+                    fullUrl += `?contactId=${contactId}`;
+                }
+
+                fetch(fullUrl)
+                    .then(res => res.text())
+                    .then(html => {
+                        debugger;
+                        target.innerHTML = html;
+                        if(targetSelector === "#clientsTab"){
+                            $("#table1").DataTable({
+                                "responsive": true, "lengthChange": true, "autoWidth": true, "paging": true, "ordering": true,
+                                "info": true, "pageLength": 5, "lengthMenu": [5, 10, 25, 50],
+                            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+                        }
+                    })
+                    .catch(() => {
+                        target.innerHTML =
+                            `<div class="alert alert-danger">
+                                Failed to load data.
+                             </div>`;
+                    });
+            }
+
+            // Load first tab on page load
+            const activeTab = document.querySelector('#contactsTabs .nav-link.active');
+            if (activeTab) {
+                loadTab(activeTab);
+            }
+
+            // Load when tab becomes active
+            tabs.forEach(tab => {
+                tab.addEventListener('shown.bs.tab', function () {
+                    loadTab(this);
+                });
+            });
+
+        });
+
+
+        $("#table1").DataTable({
+            "responsive": true, "lengthChange": true, "autoWidth": true, "paging": true, "ordering": true,
+            "info": true, "pageLength": 10, "lengthMenu": [5, 10, 25, 50],
+        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+
+    </script>
+
+
+}

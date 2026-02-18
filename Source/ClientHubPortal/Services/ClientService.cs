@@ -13,6 +13,8 @@ public class ClientService : IClientService
     }
 
 
+    #region ----------------- Clients Section -----------------
+
     public async Task<GenericResponse> CreateClientAsync(ClientViewModel model)
     {
         var client = new Clients()
@@ -20,6 +22,12 @@ public class ClientService : IClientService
             Name = model.Name
         };
         return await clientRepository.CreateClientAsync(client);
+    }
+
+
+    public async Task<GenericResponse> DeleteClientAsync(Guid clientId)
+    {
+        return await clientRepository.DeleteClientAsync(clientId);
     }
 
 
@@ -43,6 +51,11 @@ public class ClientService : IClientService
         };
     }
 
+    #endregion
+
+
+
+    #region ----------------- Contacts Section -----------------
 
 
     public async Task<GenericResponse> CreateContactAsync(ContactViewModel model)
@@ -103,8 +116,6 @@ public class ClientService : IClientService
     }
 
 
-
-
     public async Task<GenericResponse<List<ContactViewModel>>> GetUnlinkedContactsAsync(Guid clientId)
     {
         var response = await clientRepository.GetUnlinkedContactsAsync(clientId);
@@ -128,8 +139,6 @@ public class ClientService : IClientService
     }
 
 
-
-
     public async Task<GenericResponse> LinkContactAsync(Guid clientId, Guid contactId)
     {
         var response = await clientRepository.LinkContactAsync(clientId, contactId);
@@ -140,8 +149,6 @@ public class ClientService : IClientService
             StatusMessage = response.StatusMessage
         };
     }
-
-
 
 
     public async Task<GenericResponse> DeLinkContactAsync(Guid clientId, Guid contactId)
@@ -155,5 +162,5 @@ public class ClientService : IClientService
         };
     }
 
-
+    #endregion
 }

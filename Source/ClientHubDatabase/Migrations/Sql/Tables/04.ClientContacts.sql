@@ -7,8 +7,10 @@ BEGIN
         LinkedAt DATETIME NOT NULL DEFAULT GETDATE(),
         DeLinkedAt DATETIME NULL,
 		CONSTRAINT PK_ClientContacts PRIMARY KEY CLUSTERED (ClientId ASC, ContactId ASC),        
-        CONSTRAINT FK_ClientContacts_Clients FOREIGN KEY (ClientId) REFERENCES Clients(Id),
-        CONSTRAINT FK_ClientContacts_Contacts FOREIGN KEY (ContactId) REFERENCES Contacts(Id),
+        CONSTRAINT FK_ClientContacts_Clients FOREIGN KEY (ClientId) REFERENCES Clients(Id)
+        ON DELETE CASCADE,
+        CONSTRAINT FK_ClientContacts_Contacts FOREIGN KEY (ContactId) REFERENCES Contacts(Id)
+        ON DELETE CASCADE,
         INDEX IX_ClientContacts (LinkedAt, DeLinkedAt)
     )
 END

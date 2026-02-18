@@ -15,7 +15,7 @@ public class ClientRepository : IClientRepository
     public ClientRepository(ILogger<ClientRepository> logger, ClientHubDbContext database)
     {
         this.logger = logger;
-        this.database = database;        
+        this.database = database;
     }
 
 
@@ -65,6 +65,56 @@ public class ClientRepository : IClientRepository
         return response;
     }
 
+
+
+
+    public async Task<GenericResponse> DeleteClientAsync(Guid clientId)
+    {
+        GenericResponse? response = new GenericResponse()
+        {
+            Status = true,
+            StatusCode = (int)HttpStatusCode.OK,
+            StatusMessage = "Client deleted successfully"
+        };
+        try
+        {
+            using (var db = database.CreateSqlConnection())
+            {
+                await db.OpenAsync();
+                using (SqlTransaction sqltrans = db.BeginTransaction(IsolationLevel.ReadCommitted))
+                {
+                    try
+                    {
+                        string query = "UPDATE T SET T.DeletedAt = GETDATE() FROM dbo.[Clients] T WITH(NOLOCK) WHERE T.Id = @Id";
+                        var parameters = new
+                        {
+                            Id = clientId
+                        };
+                        await db.QueryFirstOrDefaultAsync<GenericResponse>(sql: query,
+                            param: parameters,
+                            commandType: CommandType.Text,
+                            commandTimeout: 360,
+                            transaction: sqltrans);
+                        await sqltrans.CommitAsync();
+                    }
+                    catch (Exception ex)
+                    {
+                        await sqltrans.RollbackAsync();
+                        await db.CloseAsync();
+                        throw ex;
+                    }
+                }
+                await db.CloseAsync();
+            }
+        }
+        catch (Exception ex)
+        {
+            response.Status = false;
+            response.StatusCode = (int)HttpStatusCode.InternalServerError;
+            response.StatusMessage = $"{ex.Message} <br/> {ex.StackTrace}";
+        }
+        return response;
+    }
 
     public async Task<GenericResponse<IEnumerable<Clients>>> GetClientsAsync()
     {

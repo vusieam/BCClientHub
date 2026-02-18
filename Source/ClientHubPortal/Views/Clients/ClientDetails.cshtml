@@ -8,7 +8,7 @@
     <div class="card-header">
         <h4 class="card-title align-middle mb-0 fw-bold text-uppercase">Client Details</h4>
         <div class="float-end">
-            <button type="button" class="btn btn-sm btn-outline-warning me-3" onclick="history.back();">
+            <button type="button" class="btn btn-sm btn-outline-info me-3" onclick="history.back();">
                 <i class="bx bx-undo bx-sm me-1"></i>
                 <span class="me-1">Back</span>
             </button>
@@ -93,11 +93,14 @@
                 fetch(fullUrl)
                     .then(res => res.text())
                     .then(html => {
+                        debugger;
                         target.innerHTML = html;
-                        $("#table1").DataTable({
-                            "responsive": true, "lengthChange": true, "autoWidth": true, "paging": true, "ordering": true,
-                            "info": true, "pageLength": 5, "lengthMenu": [5, 10, 25, 50],
-                        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');  
+                        if(targetSelector === "#contactsTab"){
+                            $("#table1").DataTable({
+                                "responsive": true, "lengthChange": true, "autoWidth": true, "paging": true, "ordering": true,
+                                "info": true, "pageLength": 5, "lengthMenu": [5, 10, 25, 50],
+                            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+                        }
                     })
                     .catch(() => {
                         target.innerHTML =

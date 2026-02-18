@@ -22,20 +22,20 @@
     </div>
 
     <div class="card-body">
-         @if (!Model.Any())
-            {
+        @if (!Model.Any())
+        {
             <div class="text-center text-muted p-4"> No client(s) found.  </div>
-            }
-            else
-            {
-        <table id="table1" class="table table-bordered table-striped">
-           
+        }
+        else
+        {
+            <table id="table1" class="table table-bordered table-striped">
+
                 <thead>
                     <tr class="text-center text-uppercase">
                         <th class="align-middle text-center">@Html.DisplayNameFor(model => model.Name)</th>
                         <th class="align-middle text-center">@Html.DisplayNameFor(model => model.NameCode)</th>
                         <th class="align-middle text-center">@Html.DisplayNameFor(model => model.NoOfContacts)</th>
-                        <th class="align-middle text-center" style="width:120px !important;""">Options</th>
+                        <th class="align-middle text-center" style="width:120px !important;" "">Options</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -45,7 +45,7 @@
                             <td class="align-middle text-start pb-0">@Html.DisplayFor(modelItem => item.Name)</td>
                             <td class="align-middle text-start">@Html.DisplayFor(modelItem => item.NameCode)</td>
                             <td class="align-middle text-center">@Html.DisplayFor(modelItem => item.NoOfContacts)</td>
-                            
+
                             <td class="align-middle text-center">
                                 @* <button type="button" class="btn btn-outline-danger btn-delete me-2 mb-2" data-value="@item.Id" title="Delete">
                                     <i class='bx bx-trash bx-sm'></i>
@@ -55,9 +55,14 @@
                                     <i class="bx bx-file-detail bx-sm"></i>
                                 </button> *@
 
-                                <a asp-controller="Clients" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-info me-2 mb-2" title="Edit">
+                                <button type="button" class="btn btn-outline-danger btn-details me-2 mb-2"
+                                        onclick="deleteClient('@item.Id', this)" title="Delete Client">
+                                    <i class="bx bx-trash bx-sm"></i>
+                                </button>
+
+                                @* <a asp-controller="Clients" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-danger me-2 mb-2" title="Edit">
                                     <i class='bx bx-trash bx-sm'></i>
-                                </a>
+                                </a> *@
 
                                 <a asp-controller="Clients" asp-action="ClientDetails" asp-route-id="@item.Id" class="btn btn-info me-2 mb-2" title="View">
                                     <i class='bx bx-file-detail bx-sm'></i>
@@ -66,8 +71,8 @@
                         </tr>
                     }
                 </tbody>
-        </table>
-            }
+            </table>
+        }
     </div>
 </div>
 
@@ -114,7 +119,7 @@
             "info": true, "pageLength": 10, "lengthMenu": [5, 10, 25, 50],
         }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
 
-          
+
 
         $("#alertDemo").click(function(){
             Toast.fire({
@@ -155,5 +160,32 @@
                 }
             });
         });
+
+
+        function deleteClient(clientId, button) {
+            debugger;
+            $.post('/Clients/DeleteClient',
+                { clientId: clientId},
+                function (response) {
+                    debugger;
+                    if (response.status) {
+                        Toast.fire({
+                            icon: "success",
+                            title: response.statusMessage
+                        });
+                        // var table = $('#table1').DataTable();
+                        // table
+                        //     .row($(button).closest('tr'))
+                        //     .remove()
+                        //     .draw();
+                    }
+                    else{
+                        Toast.fire({
+                            icon: "errror",
+                            title: response.statusMessage
+                        });
+                    }
+                });
+        }
     </script>
 }
