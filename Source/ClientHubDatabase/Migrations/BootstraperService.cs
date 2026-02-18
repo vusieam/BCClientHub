@@ -49,6 +49,7 @@ public class BootstraperService
             return;
         using var db = database.CreateSqlConnection();
         await db.OpenAsync();
+        tables = tables.OrderBy(o => o.Key).ToDictionary();
         foreach (var kv in tables)
         {
             var fileName = kv.Key;

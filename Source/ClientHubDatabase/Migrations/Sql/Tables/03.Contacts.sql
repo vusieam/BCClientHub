@@ -6,7 +6,9 @@ BEGIN
         Name NVARCHAR(255) NOT NULL,
         Surname NVARCHAR(500) NOT NULL,
         EmailAddress NVARCHAR(500) UNIQUE NOT NULL,
-		CONSTRAINT PK_Contacts PRIMARY KEY CLUSTERED (Id ASC, EmailAddress ASC),
-        INDEX IX_Contacts (Name)
+        CreatedAt DATETIME NOT NULL DEFAULT GETDATE(),
+        DeletedAt DATETIME DEFAULT NULL,
+		CONSTRAINT PK_Contacts PRIMARY KEY CLUSTERED (Id ASC),
+        INDEX IX_Contacts (Name, CreatedAt, DeletedAt, EmailAddress)
     )
 END

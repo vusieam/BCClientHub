@@ -2,11 +2,13 @@
 BEGIN
     CREATE TABLE dbo.ClientContacts 
     (
-        ClientId NVARCHAR(255) NOT NULL,
-        ContactId NVARCHAR(255) UNIQUE NOT NULL,
+        ClientId UNIQUEIDENTIFIER NOT NULL,
+        ContactId UNIQUEIDENTIFIER NOT NULL,
         LinkedAt DATETIME NOT NULL DEFAULT GETDATE(),
         DeLinkedAt DATETIME NULL,
-		CONSTRAINT PK_ClientContacts PRIMARY KEY CLUSTERED (ClientId ASC, ContactId ASC),
+		CONSTRAINT PK_ClientContacts PRIMARY KEY CLUSTERED (ClientId ASC, ContactId ASC),        
+        CONSTRAINT FK_ClientContacts_Clients FOREIGN KEY (ClientId) REFERENCES Clients(Id),
+        CONSTRAINT FK_ClientContacts_Contacts FOREIGN KEY (ContactId) REFERENCES Contacts(Id),
         INDEX IX_ClientContacts (LinkedAt, DeLinkedAt)
     )
 END

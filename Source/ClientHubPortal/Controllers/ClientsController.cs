@@ -23,29 +23,57 @@ public class ClientsController : Controller
     #region ----------------- View Routes -----------------
 
     [HttpGet]
-
     public async Task<IActionResult> IndexAsync()
     {
+        //ViewBag.Header = $"Clients";
+        ViewBag.CurrentHeader = $"Clients";
         var envelopeResponse = await clientService.GetClientsAsync();
         var clients = (envelopeResponse.Status) ? envelopeResponse.Data : new List<ClientViewModel>();
 
         return View(clients);
+    }
+
+
+
+    [HttpGet]
+    public async Task<IActionResult> ClientDetailsAsync(Guid Id)
+    {
+        //ViewBag.Header = $"Clients";
+        ViewBag.CurrentHeader = $"Clients Details";
+        var envelopeResponse = await clientService.GetClientsAsync();
+        var client = envelopeResponse.Data.FirstOrDefault(f => f.Id == Id);
+        if (client == null)
+            return View();
+        return View(client);
     }
 
 
     [HttpGet]
-
-    public async Task<IActionResult> ContactsAsync()
+    public async Task<IActionResult> ClientInfoAsync(Guid clientId)
     {
+        //ViewBag.Header = $"Clients";
+        ViewBag.CurrentHeader = $"Clients Details";
         var envelopeResponse = await clientService.GetClientsAsync();
-        var clients = (envelopeResponse.Status) ? envelopeResponse.Data : new List<ClientViewModel>();
-
-        return View(clients);
+        var client = envelopeResponse.Data.FirstOrDefault(f => f.Id == clientId);        
+        return PartialView("_ClientInfoPartial", client);
     }
 
 
 
-    public IActionResult CreateModal()
+    [HttpGet]
+    public async Task<IActionResult> GetClientContactsAsync(Guid clientId)
+    {
+        //ViewBag.Header = $"Clients";
+        ViewBag.CurrentHeader = $"Clients Details";
+        var envelopeResponse = await clientService.GetClientContactsAsync(clientId);
+        var clientContacts = envelopeResponse.Data;
+        return PartialView("_ClientContactsPartial", clientContacts);
+    }
+
+
+
+    [HttpGet]
+    public IActionResult CreateClientModal()
     {
         return PartialView("_CreateClientModal", new ClientViewModel());
     }
@@ -58,13 +86,12 @@ public class ClientsController : Controller
 
 
     [HttpPost]
-    public async Task<IActionResult> CreateAjax(ClientViewModel model)
+    public async Task<IActionResult> CreateClientAjax(ClientViewModel model)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
 
         var apiResponse = await clientService.CreateClientAsync(model);
-
         return Json(apiResponse);
     }
 

@@ -4,117 +4,117 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<button class="btn btn-primary" id="alertDemo">
-    Add Client
-</button>
 
 <div class="card">
     <div class="card-header">
-        <h4 class="card-title align-middle mb-0 mt-2 fw-bold text-uppercase text-primary">List of Registered Clients</h4>
+        <h4 class="card-title align-middle mb-0 mt-2 fw-bold text-uppercase">List of Registered Clients</h4>
         <div class="float-end">
-            @* <button type="button" class="btn btn-outline-primary me-5" onclick="history.back();">
-                <i class="bi bi-sign-turn-left me-1"></i>
-                <span class="text-uppercase">Back</span>
-            </button> *@
+            <button type="button" class="btn btn-sm btn-outline-warning me-3" onclick="history.back();">
+                <i class="bx bx-undo bx-sm me-1"></i>
+                <span class="me-1">Back</span>
+            </button>
 
-            <button class="btn btn-md btn-outline-primary float-end" id="openClientModal">
-                <span class="me-2">Add Client</span>
-                @* <i class="bi bi-person-fill-add"></i> *@
+            <button class="btn btn-sm  btn-primary float-end" id="openClientModal">
+                <span class="me-1 mt-1">Add Client</span>
                 <i class="bx bx-book-add bx-sm"></i>
             </button>
         </div>
     </div>
 
     <div class="card-body">
-        <table id="table1" class="table table-bordered table-striped">
-            @if (!Model.Any())
+         @if (!Model.Any())
             {
-                <tbody class="text-center">  No client(s) found.  </tbody>
+            <div class="text-center text-muted p-4"> No client(s) found.  </div>
             }
             else
             {
+        <table id="table1" class="table table-bordered table-striped">
+           
                 <thead>
                     <tr class="text-center text-uppercase">
-                        <th>@Html.DisplayNameFor(model => model.Name)</th>
-                        <th>@Html.DisplayNameFor(model => model.NameCode)</th>
-                        <th>@Html.DisplayNameFor(model => model.NoOfContacts)</th>
-                        @* <th>@Html.DisplayNameFor(model => model.CreatedAt)</th> *@
-                        <th>@Html.DisplayNameFor(model => model.DeletedAt)</th>
-                        <th style="max-width:200px !important;">Options</th>
+                        <th class="align-middle text-center">@Html.DisplayNameFor(model => model.Name)</th>
+                        <th class="align-middle text-center">@Html.DisplayNameFor(model => model.NameCode)</th>
+                        <th class="align-middle text-center">@Html.DisplayNameFor(model => model.NoOfContacts)</th>
+                        <th class="align-middle text-center" style="width:120px !important;""">Options</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var item in Model)
                     {
                         <tr>
-                            <td class="align-middle text-start">@Html.DisplayFor(modelItem => item.Name)</td>
+                            <td class="align-middle text-start pb-0">@Html.DisplayFor(modelItem => item.Name)</td>
                             <td class="align-middle text-start">@Html.DisplayFor(modelItem => item.NameCode)</td>
                             <td class="align-middle text-center">@Html.DisplayFor(modelItem => item.NoOfContacts)</td>
-                            @* <td>@Html.DisplayFor(modelItem => item.CreatedAt)</td> *@
-                            <td class="text-center">
-                                @if (item.DeletedAt == null || item.DeletedAt == DateTime.MinValue)
-                                {
-                                    <button type="button" class="btn btn-success pe-2 ps-2" style="min-width:130px !important;">
-                                        <span class="text-uppercase me-2">ACTIVE</span>
-                                        <i class='bx bxs-check-shield bx-sm float-end'></i>
-                                    </button>
-                                }
-                                else
-                                {
-                                    <button type="button" class="btn btn-danger pe-3 ps-3" style="min-width:130px !important;">
-                                        <span class="text-uppercase me-2">DELETED</span>
-                                        <i class='bx bxs-shield-x bx-sm float-end'></i>
-                                    </button>
-                                }
-                            </td>
-                            <td class="text-center">
-
-                                <button type="button" class="btn btn-outline-danger me-2 mb-2" title="Delete">
+                            
+                            <td class="align-middle text-center">
+                                @* <button type="button" class="btn btn-outline-danger btn-delete me-2 mb-2" data-value="@item.Id" title="Delete">
                                     <i class='bx bx-trash bx-sm'></i>
                                 </button>
 
-                                <button class="btn btn-info me-2 mb-2" title="View Details">
-                                    @* <i class='bx bx-detail bx-sm'></i> *@
+                                <button type="button" class="btn btn-info btn-details me-2 mb-2" data-value="@item.Id" title="View Details">
                                     <i class="bx bx-file-detail bx-sm"></i>
-                                </button>
+                                </button> *@
+
+                                <a asp-controller="Clients" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-info me-2 mb-2" title="Edit">
+                                    <i class='bx bx-trash bx-sm'></i>
+                                </a>
+
+                                <a asp-controller="Clients" asp-action="ClientDetails" asp-route-id="@item.Id" class="btn btn-info me-2 mb-2" title="View">
+                                    <i class='bx bx-file-detail bx-sm'></i>
+                                </a>
                             </td>
                         </tr>
                     }
                 </tbody>
-            }
         </table>
+            }
     </div>
 </div>
 
 <div id="modalContainer"></div>
 
 @section Scripts {
-
     <partial name="_ValidationScriptsPartial" />
-
     <script>
 
         const Toast = Swal.mixin({
-                toast: true,
-                position: "top-end",
-                showConfirmButton: false,
-                timer: 3000,
-                timerProgressBar: true,
-                didOpen: (toast) => {
-                    toast.onmouseenter = Swal.stopTimer;
-                    toast.onmouseleave = Swal.resumeTimer;
-                }
-            });
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.onmouseenter = Swal.stopTimer;
+                toast.onmouseleave = Swal.resumeTimer;
+            }
+        });
 
         $("#openClientModal").click(function () {
-            $.get("/Clients/CreateModal", function (data) {
+            $.get("/Clients/CreateClientModal", function (data) {
                 $("#modalContainer").html(data);
                 var modal = new bootstrap.Modal(document.getElementById('addClientModal'));
                 modal.show();
             });
         });
 
+        $(".btn-details").click(async function(e){
+            e.preventDefault();
 
+            debugger;
+
+            const deviceId = $(this).data('value');
+            console.log('Button data-value:', deviceId);
+
+        });
+
+
+
+        $("#table1").DataTable({
+            "responsive": true, "lengthChange": true, "autoWidth": true, "paging": true, "ordering": true,
+            "info": true, "pageLength": 10, "lengthMenu": [5, 10, 25, 50],
+        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+
+          
 
         $("#alertDemo").click(function(){
             Toast.fire({
@@ -130,7 +130,7 @@
             if (!$(this).valid()) return;
 
             $.ajax({
-                url: '/Clients/CreateAjax',
+                url: '/Clients/CreateClientAjax',
                 type: 'POST',
                 data: $(this).serialize(),
                 success: function (data) {

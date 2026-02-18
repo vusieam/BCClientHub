@@ -1,0 +1,41 @@
+﻿<div class="modal fade" id="contactsModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title">Unlinked Contacts</h5>
+                <button type="button" class="btn-close"
+                        data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body">
+                <table id="table1" class="table table-bordered table-striped w-100">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th width="120"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var contact in Model)
+                        {
+                            <tr>
+                                <td>@contact.Fullname</td>
+                                <td>@contact.EmailAddress</td>
+                                <td>
+                                    <button class="btn btn-success btn-sm float-end"
+                                            onclick="linkContact('@ViewBag.ClientId', '@contact.Id', this)">
+                                        <span class="me-1 mt-1">Link</span>
+                                        <i class="bx bx-plug-connect  bx-sm"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>

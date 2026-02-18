@@ -1,25 +1,24 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿namespace ClientHubPortal.Models;
 
-namespace ClientHubPortal.Models
+public class ClientViewModel
 {
-    public class ClientViewModel
-    {
-        [Display(Name = "Identifier")]
-        public Guid? Id { get; set; }
+    [Display(Name = "Identifier")]
+    public Guid? Id { get; set; }
 
-        [Display(Name = "Name")]
-        public string Name { get; set; }
+    [Display(Name = "Name")]
+    public string Name { get; set; }
 
-        [Display(Name = "Client Code")]
-        public string? NameCode { get; set; }
+    [Display(Name = "Client code")]
+    public string? NameCode { get; set; }
 
-        [Display(Name = "No. of Linked Contacts")]
-        public int? NoOfContacts { get; set; }
+    [Display(Name = "No. of linked contacts")]
+    public int? NoOfContacts { get; set; }
 
-        [Display(Name = "Date Created")]
-        public DateTime? CreatedAt { get; set; }
+    [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+    [Display(Name = "Date created")]
+    public DateTime? CreatedAt { get; set; }
 
-        [Display(Name = "Status Description")]
-        public DateTime? DeletedAt { get; set; }
-    }
+    [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+    [Display(Name = "Status description")]
+    public DateTime? DeletedAt { get; set; }
 }

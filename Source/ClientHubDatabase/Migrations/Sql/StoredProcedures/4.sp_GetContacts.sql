@@ -1,0 +1,11 @@
+CREATE OR ALTER PROC dbo.sp_GetContacts
+WITH ENCRYPTION
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+	SELECT * 
+	FROM dbo.vw_AllContacts C WITH(NOLOCK)
+	ORDER BY C.Name, C.Surname
+
+END

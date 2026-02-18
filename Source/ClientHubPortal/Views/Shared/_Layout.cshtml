@@ -4,8 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Client Hub </title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    @* <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" /> *@
+    @* <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" /> *@
 
     <!-- Basic Icons -->
     <link href="https://cdn.boxicons.com/3.0.8/fonts/basic/boxicons.min.css" rel="stylesheet">
@@ -16,7 +15,37 @@
     <!-- Enable Animation -->
     <link href="https://cdn.boxicons.com/animations.min.css" rel="stylesheet">
 
-    <link href="https://cdn.datatables.net/2.3.7/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+    @* <link href="https://cdn.datatables.net/2.3.7/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/autofill/2.7.1/css/autoFill.dataTables.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/buttons/3.2.6/css/buttons.dataTables.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/fixedcolumns/5.0.5/css/fixedColumns.dataTables.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/fixedheader/4.0.5/css/fixedHeader.dataTables.min.css" rel="stylesheet"> *@
+
+
+
+
+
+
+
+    <link rel="preload" href="~/AdminLTE/css/adminlte.css" as="style" />
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/@@fontsource/source-sans-3@5.0.12/index.css"
+          integrity="sha256-tXJfXfp6Ewt1ilPzLDtQnJV4hclT9XuaZUKyUvmyr+Q="
+          crossorigin="anonymous"
+          media="print"
+          onload="this.media='all'" />
+    <link rel="stylesheet" href="~/adminLTE/lib/overlayscrollbars/styles/overlayscrollbars.min.css" />
+    <link rel="stylesheet" href="~/adminLTE/lib/bootstrap-icons/font/bootstrap-icons.min.css" />
+    <link rel="stylesheet" href="~/adminLTE/css/adminlte.css" />
+    <link rel="stylesheet" href="~/adminLTE/lib/apexcharts/apexcharts.css" />
+    <link rel="stylesheet" href="~/adminLTE/lib/jsvectormap/css/jsvectormap.min.css" />
+
+    <!-- DataTables -->
+    <link rel="stylesheet" href="~/adminLTE/lib/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="~/adminLTE/lib/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="~/adminLTE/lib/datatables-buttons/css/buttons.bootstrap4.min.css">
+
+
 
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/ClientHubPortal.styles.css" asp-append-version="true" />
@@ -39,7 +68,7 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Clients" asp-action="Index">Clients</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Privacy">Contacts</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Contacts" asp-action="Index">Contacts</a>
                         </li>
                     </ul>
                 </div>
@@ -47,6 +76,28 @@
         </nav>
     </header>
     <div class="container-fluid">
+        <!--begin::App Content Header-->
+        <div class="app-content-header">
+            <!--begin::Container-->
+            <div class="container-fluid">
+                <!--begin::Row-->
+                <div class="row">
+                    <div class="col-sm-6"><h3 class="mb-0">@ViewData["Header"]</h3></div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-end">
+                            <li class="breadcrumb-item"><a asp-controller="Dashboard" asp-action="Index">Dashboard</a></li>
+                            @if (!string.IsNullOrEmpty(ViewData["CurrentHeader"]?.ToString()))
+                            {
+                                <li class="breadcrumb-item active" aria-current="page">@ViewData["CurrentHeader"]</li>
+                            }
+                        </ol>
+                    </div>
+                </div>
+                <!--end::Row-->
+            </div>
+            <!--end::Container-->
+        </div>
+        <!--end::App Content Header-->
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
@@ -54,15 +105,56 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2026 - Binary City - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2026 - Client hub by  <a href="https://www.bcity.me/" target="_blank">Binary City</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+    @* <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.datatables.net/2.3.7/js/dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/2.3.7/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.datatables.net/autofill/2.7.1/js/dataTables.autoFill.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/3.2.6/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/fixedcolumns/5.0.5/js/dataTables.fixedColumns.min.js"></script>
+    <script src="https://cdn.datatables.net/fixedheader/4.0.5/js/dataTables.fixedHeader.min.js"></script> *@
+
+
+
+
+
+
+    <script src="~/adminLTE/lib/overlayscrollbars/browser/overlayscrollbars.browser.es6.min.js"></script>
+    <script src="~/adminLTE/lib/popperjs/umd/popper.min.js"></script>
+    <!-- DataTables  & Plugins -->
+    <script src="~/adminLTE/lib/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/adminLTE/lib/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/adminLTE/lib/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="~/adminLTE/lib/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="~/adminLTE/lib/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="~/adminLTE/lib/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+    <script src="~/adminLTE/lib/jszip/jszip.min.js"></script>
+    <script src="~/adminLTE/lib/pdfmake/pdfmake.min.js"></script>
+    <script src="~/adminLTE/lib/pdfmake/vfs_fonts.js"></script>
+    <script src="~/adminLTE/lib/datatables-buttons/js/buttons.html5.min.js"></script>
+    <script src="~/adminLTE/lib/datatables-buttons/js/buttons.print.min.js"></script>
+    <script src="~/adminLTE/lib/datatables-buttons/js/buttons.colVis.min.js"></script>
+    <script src="~/adminLTE/js/adminlte.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js" crossorigin="anonymous"></script>
+    <script>
+        new Sortable(document.querySelector('.connectedSortable'), {
+          group: 'shared',
+          handle: '.card-header',
+        });
+
+        const cardHeaders = document.querySelectorAll('.connectedSortable .card-header');
+        cardHeaders.forEach((cardHeader) => {
+          cardHeader.style.cursor = 'move';
+        });
+    </script>
+
+
 
     <script>
         $(function () {

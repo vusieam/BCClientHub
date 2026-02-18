@@ -1,0 +1,271 @@
+﻿@model ClientViewModel;
+@{
+    ViewData["Title"] = "Clients Details Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card">
+    <div class="card-header">
+        <h4 class="card-title align-middle mb-0 fw-bold text-uppercase">Client Details</h4>
+        <div class="float-end">
+            <button type="button" class="btn btn-sm btn-outline-warning me-3" onclick="history.back();">
+                <i class="bx bx-undo bx-sm me-1"></i>
+                <span class="me-1">Back</span>
+            </button>
+
+            <button class="btn btn-sm  btn-primary float-end" id="openClientModal" onclick="openContactsModal('@Model.Id')">
+                <span class="me-1 mt-1">Link Existing Contact</span>
+                <i class="bx bx-book-add bx-sm"></i>
+            </button>
+
+        </div>
+    </div>
+    <div class="card-body">
+        <ul class="nav nav-tabs" id="clientTabs" role="tablist">
+            <li class="nav-item">
+                <button class="nav-link active"
+                        data-url="@Url.Action("ClientInfo")"
+                        data-target="#clientInfoTab"
+                        data-bs-toggle="tab"
+                        data-bs-target="#clientInfoTab"
+                        data-client-id="@Model.Id"
+                        type="button">
+                    General
+                </button>
+            </li>
+
+
+            <li class="nav-item">
+                <button class="nav-link"
+                        id="pending-tab"
+                        data-bs-toggle="tab"
+                        data-bs-target="#contactsTab"
+                        data-url="@Url.Action("GetClientContacts")"
+                        data-client-id="@Model.Id"
+                        type="button">
+                    Contact(s)
+                </button>
+            </li>
+
+        </ul>
+
+        <div class="tab-content border border-top-0 p-3">
+            <div class="tab-pane fade show active" id="clientInfoTab"></div>
+            <div class="tab-pane fade" id="contactsTab"></div>
+        </div>
+    </div>
+
+</div>
+
+
+<div id="modalContainer"></div>
+
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const tabs = document.querySelectorAll('#clientTabs button');
+
+            function loadTab(button) {
+                debugger;
+
+                const url = button.getAttribute("data-url");
+                const clientId = button.getAttribute("data-client-id");
+                const targetSelector = button.getAttribute("data-bs-target");
+                const target = document.querySelector(targetSelector);
+
+                target.innerHTML = `
+                    <div class="text-center p-4">
+                        <div class="spinner-border"></div>
+                    </div>
+                `;
+
+                let fullUrl = url;
+
+                if (clientId) {
+                    fullUrl += `?clientId=${clientId}`;
+                }
+
+                fetch(fullUrl)
+                    .then(res => res.text())
+                    .then(html => {
+                        target.innerHTML = html;
+                        $("#table1").DataTable({
+                            "responsive": true, "lengthChange": true, "autoWidth": true, "paging": true, "ordering": true,
+                            "info": true, "pageLength": 5, "lengthMenu": [5, 10, 25, 50],
+                        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');  
+                    })
+                    .catch(() => {
+                        target.innerHTML =
+                            `<div class="alert alert-danger">
+                                Failed to load data.
+                             </div>`;
+                    });
+            }
+
+            // Load first tab on page load
+            const activeTab = document.querySelector('#clientTabs .nav-link.active');
+            if (activeTab) {
+                loadTab(activeTab);
+            }
+
+            // Load when tab becomes active
+            tabs.forEach(tab => {
+                tab.addEventListener('shown.bs.tab', function () {
+                    loadTab(this);
+                });
+            });
+
+        });
+
+
+        $("#table1").DataTable({
+            "responsive": true, "lengthChange": true, "autoWidth": true, "paging": true, "ordering": true,
+            "info": true, "pageLength": 10, "lengthMenu": [5, 10, 25, 50],
+        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');  
+
+    </script>
+
+
+
+    <script>
+
+        const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.onmouseenter = Swal.stopTimer;
+                toast.onmouseleave = Swal.resumeTimer;
+            }
+        });
+
+        function openContactsModal(clientId) {
+            debugger;
+            $.get('/Contacts/GetUnlinkedContacts', { clientId: clientId }, function (data) {
+                $('#modalContainer').html(data);
+                const modalPage = document.getElementById('contactsModal');
+                var modal = new bootstrap.Modal(modalPage, {
+                    backdrop: 'static',   // prevents outside click closing
+                    keyboard: false       // prevents ESC closing
+                });
+                modal.show();
+
+                // $("#table1").DataTable({
+                //         "responsive": true, "lengthChange": true, "autoWidth": true, "paging": true, "ordering": true,
+                //         "info": true, "pageLength": 10, "lengthMenu": [5, 10, 25, 50],
+                //     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');  
+
+                $('#table1').DataTable({
+                    destroy: true,
+                    responsive: true,
+                    autoWidth: false,
+                    language: {
+                        emptyTable: `
+                            <div class="text-center p-4">
+                                <i class="bx bx-user-x bx-xl text-muted mb-2"></i>
+                                <div class="text-muted fw-semibold">
+                                    No unlinked contacts available
+                                </div>
+                            </div>
+                        `,
+                        zeroRecords: "No matching contacts found"
+                    },
+                    initComplete: function () {
+                        var api = this.api();
+
+                        if (api.data().count() === 0) {
+                            // wrapper.find('.dataTables_filter').hide();
+                            $('#table1 thead').hide();
+                            $('.dataTables_filter').hide();
+                            $('.dataTables_info').hide();
+                            $('.dataTables_paginate').hide();
+                            $('.dataTables_length').hide();
+                        }
+                    }
+                });
+
+                // Initialize DataTable AFTER modal is visible
+                modal.addEventListener('shown.bs.modal', function () {
+                    // $("#table1").DataTable({
+                    //     "responsive": true, "lengthChange": true, "autoWidth": true, "paging": true, "ordering": true,
+                    //     "info": true, "pageLength": 10, "lengthMenu": [5, 10, 25, 50],
+                    // }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');  
+
+                }, { once: false });
+            });
+        }
+
+        function linkContact(clientId, contactId, button) {
+            debugger;
+            $.post('/Contacts/LinkContact',
+                { clientId: clientId, contactId: contactId },
+                function (response) {
+                    debugger;
+                    if (response.status) {
+                        Toast.fire({
+                            icon: "success",
+                            title: response.statusMessage
+                        });                        
+                        // openContactsModal(clientId); // Refresh modal
+                        var table = $('#table1').DataTable();
+                        table
+                            .row($(button).closest('tr'))
+                            .remove()
+                            .draw();
+                    }
+                    else{
+                        Toast.fire({
+                            icon: "errror",
+                            title: response.statusMessage
+                        });  
+                    }
+                });
+        }
+
+
+
+
+        function deLinkContact(clientId, contactId, button) {
+            debugger;
+            $.post('/Contacts/DeLinkContact',
+                { clientId: clientId, contactId: contactId },
+                function (response) {
+                    debugger;
+                    if (response.status) {
+                        Toast.fire({
+                            icon: "success",
+                            title: response.statusMessage
+                        });                        
+                        // openContactsModal(clientId); // Refresh modal
+                        var table = $('#table1').DataTable();
+                        table
+                            .row($(button).closest('tr'))
+                            .remove()
+                            .draw();
+                    }
+                    else{
+                        Toast.fire({
+                            icon: "errror",
+                            title: response.statusMessage
+                        });  
+                    }
+                });
+        }
+
+        // Simple search filter
+        $(document).on("keyup", "#contactSearch", function () {
+            var value = $(this).val().toLowerCase();
+            $("#contactsTable tbody tr").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    </script>
+
+}

@@ -1,12 +1,13 @@
-﻿global using Dapper;
-global using Microsoft.Extensions.Logging;
+﻿global using ClientHubDatabase.Models;
+global using ClientHubDatabase.Repositories;
+global using ClientHubPortal.Models;
+global using Dapper;
 global using Microsoft.AspNetCore.Mvc;
+global using Microsoft.Extensions.Logging;
 global using System;
 global using System.Collections.Generic;
+global using System.ComponentModel.DataAnnotations;
 global using System.Linq;
 global using System.Text;
 global using System.Threading.Tasks;
-
-global using ClientHubDatabase.Models;
-global using ClientHubDatabase.Repositories;
-global using ClientHubPortal.Models;
+global using ClientHubPortal.Models.Clients;
