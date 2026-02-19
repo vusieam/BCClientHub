@@ -14,7 +14,6 @@
 
             <button class="btn btn-sm btn-primary float-end" id="openContactModal">
                 <span class="me-2">Add Contact</span>
-                @* <i class="bx bx-book-add bx-sm"></i> *@
                 <i class="bx bx-user-plus bx-sm"></i>
             </button>
         </div>
@@ -34,7 +33,6 @@
                         <th class="align-middle text-start">@Html.DisplayNameFor(model => model.Surname)</th>
                         <th class="align-middle text-start">@Html.DisplayNameFor(model => model.EmailAddress)</th>
                         <th>@Html.DisplayNameFor(model => model.NoOfClients)</th>
-                        @* <th>@Html.DisplayNameFor(model => model.DeletedAt)</th> *@
                         <th style="max-width:200px !important;">Options</th>
                     </tr>
                 </thead>
@@ -47,18 +45,11 @@
                             <td class="align-middle text-start">@Html.DisplayFor(modelItem => item.EmailAddress)</td>
                             <td class="align-middle text-center">@Html.DisplayFor(modelItem => item.NoOfClients)</td>
                             <td class="text-center">
-                                @* <button type="button" class="btn btn-outline-danger me-2 mb-2" title="Delete">
-                                    <i class='bx bx-trash bx-sm'></i>
-                                </button> *@
 
                                 <button type="button" class="btn btn-outline-danger me-2 mb-2"
                                         onclick="deleteContact('@item.Id', this)" title="Delete">
                                     <i class="bx bx-trash bx-sm"></i>
                                 </button>
-
-                                @* <button class="btn btn-info me-2 mb-2" title="View Details">
-                                    <i class="bx bx-file-detail bx-sm"></i>
-                                </button> *@
 
                                 <a asp-controller="Contacts" asp-action="ContactDetails" asp-route-id="@item.Id" class="btn btn-info me-2 mb-2" title="View">
                                     <i class='bx bx-file-detail bx-sm'></i>

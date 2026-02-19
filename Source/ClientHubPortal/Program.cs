@@ -11,19 +11,16 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSingleton<ClientHubDbContext>();
 builder.Services.AddSingleton<SqlFileProvider>();
 builder.Services.AddSingleton<BootstraperService>();
-//builder.Services.AddScoped<IDbConnection>(sp => new SqlConnection(builder.Configuration.GetConnectionString("DefaultConnection")));
 #endregion
 
 
 #region -- repositories --
 builder.Services.AddSingleton<IClientRepository, ClientRepository>();
-
 #endregion
 
 
 #region -- services --
 builder.Services.AddSingleton<IClientService, ClientService>();
-
 #endregion
 
 

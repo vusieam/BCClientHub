@@ -1,62 +1,62 @@
 ﻿@model ClientViewModel
 
 
-    <div class="card">
-        <div class="card-body">
-<div class="row g-3">
-    <input type="hidden" asp-for="Id" />
-    <input type="hidden" asp-for="CreatedAt" />
-
-    <div class="col-12 mb-3">
+<div class="card">
+    <div class="card-body">
         <div class="row g-3">
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="CreatedAt" />
 
-            <div class="col-md-6 mb-3">
-                <label asp-for="Name" class="form-label fw-bold"></label>
-                <div class="input-group">
-                    <input asp-for="Name" class="form-control" placeholder="Name" disabled="disabled" />
+            <div class="col-12 mb-3">
+                <div class="row g-3">
+
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="Name" class="form-label fw-bold"></label>
+                        <div class="input-group">
+                            <input asp-for="Name" class="form-control" placeholder="Name" disabled="disabled" />
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="NameCode" class="form-label fw-bold"></label>
+                        <div class="input-group">
+                            <input asp-for="NameCode" class="form-control" placeholder="Name Code" disabled="disabled" />
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="NoOfContacts" class="form-label fw-bold"></label>
+                        <div class="input-group">
+                            <input asp-for="NoOfContacts" class="form-control" placeholder="Name Code" disabled="disabled" />
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="CreatedAt" class="form-label fw-bold"></label>
+                        <div class="input-group">
+                            <input asp-for="CreatedAt" type="date" class="form-control" placeholder="Name Code" disabled="disabled" />
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="DeletedAt" class="form-label fw-bold"></label>
+                        <div class="input-group">
+                            @if (Model.DeletedAt == null || Model.DeletedAt == DateTime.MinValue)
+                            {
+                                <input value="Active" class="form-control" placeholder="Name Code" disabled="disabled" />
+
+                            }
+                            else
+                            {
+                                <input value="De-active" class="form-control" placeholder="Name Code" disabled="disabled" />
+
+                            }
+                        </div>
+                    </div>
+
                 </div>
             </div>
-
-            <div class="col-md-6 mb-3">
-                <label asp-for="NameCode" class="form-label fw-bold"></label>
-                <div class="input-group">
-                    <input asp-for="NameCode" class="form-control" placeholder="Name Code" disabled="disabled" />
-                </div>
-            </div>
-
-            <div class="col-md-6 mb-3">
-                <label asp-for="NoOfContacts" class="form-label fw-bold"></label>
-                <div class="input-group">
-                    <input asp-for="NoOfContacts" class="form-control" placeholder="Name Code" disabled="disabled" />
-                </div>
-            </div>
-
-            <div class="col-md-6 mb-3">
-                <label asp-for="CreatedAt" class="form-label fw-bold"></label>
-                <div class="input-group">
-                    <input asp-for="CreatedAt" type="date" class="form-control" placeholder="Name Code" disabled="disabled" />
-                </div>
-            </div>
-
-
-            <div class="col-md-6 mb-3">
-                <label asp-for="DeletedAt" class="form-label fw-bold"></label>
-                <div class="input-group">
-                @if (Model.DeletedAt == null || Model.DeletedAt == DateTime.MinValue)
-                {
-                                        <input value="Active" class="form-control" placeholder="Name Code" disabled="disabled" />
-
-                }
-                else
-                {
-                        <input value="De-active" class="form-control" placeholder="Name Code" disabled="disabled" />
-
-                }                
-                </div>
-            </div>
-
         </div>
     </div>
-</div>
-</div>
 </div>

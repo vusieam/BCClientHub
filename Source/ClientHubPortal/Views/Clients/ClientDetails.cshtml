@@ -110,13 +110,11 @@
                     });
             }
 
-            // Load first tab on page load
             const activeTab = document.querySelector('#clientTabs .nav-link.active');
             if (activeTab) {
                 loadTab(activeTab);
             }
 
-            // Load when tab becomes active
             tabs.forEach(tab => {
                 tab.addEventListener('shown.bs.tab', function () {
                     loadTab(this);
@@ -155,15 +153,10 @@
                 $('#modalContainer').html(data);
                 const modalPage = document.getElementById('contactsModal');
                 var modal = new bootstrap.Modal(modalPage, {
-                    backdrop: 'static',   // prevents outside click closing
-                    keyboard: false       // prevents ESC closing
+                    backdrop: 'static',  
+                    keyboard: false
                 });
                 modal.show();
-
-                // $("#table1").DataTable({
-                //         "responsive": true, "lengthChange": true, "autoWidth": true, "paging": true, "ordering": true,
-                //         "info": true, "pageLength": 10, "lengthMenu": [5, 10, 25, 50],
-                //     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');  
 
                 $('#table1').DataTable({
                     destroy: true,
@@ -184,7 +177,6 @@
                         var api = this.api();
 
                         if (api.data().count() === 0) {
-                            // wrapper.find('.dataTables_filter').hide();
                             $('#table1 thead').hide();
                             $('.dataTables_filter').hide();
                             $('.dataTables_info').hide();
@@ -194,14 +186,6 @@
                     }
                 });
 
-                // Initialize DataTable AFTER modal is visible
-                modal.addEventListener('shown.bs.modal', function () {
-                    // $("#table1").DataTable({
-                    //     "responsive": true, "lengthChange": true, "autoWidth": true, "paging": true, "ordering": true,
-                    //     "info": true, "pageLength": 10, "lengthMenu": [5, 10, 25, 50],
-                    // }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');  
-
-                }, { once: false });
             });
         }
 
@@ -216,7 +200,7 @@
                             icon: "success",
                             title: response.statusMessage
                         });                        
-                        // openContactsModal(clientId); // Refresh modal
+
                         var table = $('#table1').DataTable();
                         table
                             .row($(button).closest('tr'))
@@ -231,9 +215,6 @@
                     }
                 });
         }
-
-
-
 
         function deLinkContact(clientId, contactId, button) {
             debugger;
@@ -246,7 +227,7 @@
                             icon: "success",
                             title: response.statusMessage
                         });                        
-                        // openContactsModal(clientId); // Refresh modal
+
                         var table = $('#table1').DataTable();
                         table
                             .row($(button).closest('tr'))
@@ -262,13 +243,7 @@
                 });
         }
 
-        // Simple search filter
-        $(document).on("keyup", "#contactSearch", function () {
-            var value = $(this).val().toLowerCase();
-            $("#contactsTable tbody tr").filter(function () {
-                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-            });
-        });
+        
     </script>
 
 }
