@@ -31,7 +31,12 @@ A development practical test for client and contact information.
 - IIS
 - Docker
 - Any .NET-supported hosting environment
-
+  
+Before deployment or running the project you will only need to make adjustment to the appsettings.json file under the connectionstring and change the following:
+- YOUR_SERVER – Your SQL Server instance name
+- YOUR_DATABASE – Your database name
+- YOUR_DB_USER – Your database username with enough rights to create database.
+- YOUR_DB_PASSWORD – Your database password
 
 ## 🧑‍💻 Author
 Developed by Vusi Armstrong Malinga
