@@ -76,28 +76,25 @@
         </nav>
     </header>
     <div class="container-fluid">
-        <!--begin::App Content Header-->
-        <div class="app-content-header">
-            <!--begin::Container-->
-            <div class="container-fluid">
-                <!--begin::Row-->
-                <div class="row">
-                    <div class="col-sm-6"><h3 class="mb-0">@ViewData["Header"]</h3></div>
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-end">
-                            <li class="breadcrumb-item"><a asp-controller="Dashboard" asp-action="Index">Dashboard</a></li>
-                            @if (!string.IsNullOrEmpty(ViewData["CurrentHeader"]?.ToString()))
-                            {
-                                <li class="breadcrumb-item active" aria-current="page">@ViewData["CurrentHeader"]</li>
-                            }
-                        </ol>
+        @if (!string.IsNullOrEmpty(ViewData["CurrentHeader"]?.ToString()))
+        {
+            <div class="app-content-header">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-6"><h3 class="mb-0">@ViewData["Header"]</h3></div>
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-end">
+                                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                                @if (!string.IsNullOrEmpty(ViewData["CurrentHeader"]?.ToString()))
+                                {
+                                    <li class="breadcrumb-item active" aria-current="page">@ViewData["CurrentHeader"]</li>
+                                }
+                            </ol>
+                        </div>
                     </div>
                 </div>
-                <!--end::Row-->
             </div>
-            <!--end::Container-->
-        </div>
-        <!--end::App Content Header-->
+        }
         <main role="main" class="pb-3">
             @RenderBody()
         </main>

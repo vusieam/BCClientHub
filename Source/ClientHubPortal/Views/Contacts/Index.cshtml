@@ -30,9 +30,9 @@
             <table id="table1" class="table table-bordered table-striped">
                 <thead>
                     <tr class="text-center text-uppercase">
-                        <th>@Html.DisplayNameFor(model => model.Name)</th>
-                        <th>@Html.DisplayNameFor(model => model.Surname)</th>
-                        <th>@Html.DisplayNameFor(model => model.EmailAddress)</th>
+                        <th class="align-middle text-start">@Html.DisplayNameFor(model => model.Name)</th>
+                        <th class="align-middle text-start">@Html.DisplayNameFor(model => model.Surname)</th>
+                        <th class="align-middle text-start">@Html.DisplayNameFor(model => model.EmailAddress)</th>
                         <th>@Html.DisplayNameFor(model => model.NoOfClients)</th>
                         @* <th>@Html.DisplayNameFor(model => model.DeletedAt)</th> *@
                         <th style="max-width:200px !important;">Options</th>
@@ -47,8 +47,13 @@
                             <td class="align-middle text-start">@Html.DisplayFor(modelItem => item.EmailAddress)</td>
                             <td class="align-middle text-center">@Html.DisplayFor(modelItem => item.NoOfClients)</td>
                             <td class="text-center">
-                                <button type="button" class="btn btn-outline-danger me-2 mb-2" title="Delete">
+                                @* <button type="button" class="btn btn-outline-danger me-2 mb-2" title="Delete">
                                     <i class='bx bx-trash bx-sm'></i>
+                                </button> *@
+
+                                <button type="button" class="btn btn-outline-danger me-2 mb-2"
+                                        onclick="deleteContact('@item.Id', this)" title="Delete">
+                                    <i class="bx bx-trash bx-sm"></i>
                                 </button>
 
                                 @* <button class="btn btn-info me-2 mb-2" title="View Details">
@@ -145,5 +150,70 @@
                 }
             });
         });
+
+
+
+        function deleteContact(contactId, button) {
+            debugger;
+
+            Swal.fire({
+                    position: "top",
+                    title: 'ARE YOU SURE?',
+                    type: 'question',
+                    icon: 'question',
+                    html: 'You want to delete this contact from the system.',
+                    iconColor: "#fe4d2e",
+                    width: 600,
+                    background: "#fafafa",
+                    confirmButtonColor: "#198754",
+                    cancelButtonColor: "#dc3545",
+                    showCancelButton: true,
+                    cancelButtonText: 'No, cancel',
+                    confirmButtonText: 'Yes, delete it!',
+                    allowOutsideClick: false,
+                    reverseButtons: true,
+                    customClass: {
+                        confirmButton: 'ms-5',
+                        cancelButton: 'me-5'
+                    },
+                    showClass: {
+                        popup: `
+                            animate__animated
+                            animate__fadeOutDown
+                            animate__faster
+                        `
+                    },
+                    hideClass: {
+                        popup: `
+                            animate__animated
+                            animate__fadeInUp
+                            animate__faster
+                        `
+                    }
+                }).then(async(result) => {
+                    debugger;
+                    if(result.isConfirmed){
+                        $.post('/Contacts/DeleteContact',
+                        { contactId: contactId},
+                        function (response) {
+                            debugger;
+                            if (response.status) {
+                                location.reload();
+                            }
+                            else{
+                                Toast.fire({
+                                    icon: "errror",
+                                    title: response.statusMessage
+                                });
+                            }
+                        });
+
+                    }
+                });
+
+
+        }
+
+
     </script>
 }

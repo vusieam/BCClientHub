@@ -75,11 +75,12 @@ public class ContactsController : Controller
 
 
     [HttpGet]
-    public async Task<IActionResult> GetClientContactsAsync(Guid clientId)
+    public async Task<IActionResult> GetContactClientsAsync(Guid contactId)
     {
         //ViewBag.Header = $"Clients";
         ViewBag.CurrentHeader = $"Contact Details";
-        var envelopeResponse = await clientService.GetClientContactsAsync(clientId);
+        ViewBag.ContactId = contactId;
+        var envelopeResponse = await clientService.GetContactClientsAsync(contactId);
         var clientContacts = envelopeResponse.Data;
         return PartialView("_ContactClientsPartial", clientContacts);
     }
@@ -117,6 +118,16 @@ public class ContactsController : Controller
         var apiResponse = await clientService.DeLinkContactAsync(clientId, contactId);
         return Json(apiResponse);
     }
+
+
+
+    [HttpPost]
+    public async Task<IActionResult> DeleteContactAsync(Guid contactId)
+    {
+        var apiResponse = await clientService.DeleteContactAsync(contactId);
+        return Json(apiResponse);
+    }
+
 
 
     #endregion

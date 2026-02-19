@@ -1,0 +1,94 @@
+﻿@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="container-fluid p-0">
+
+    <!-- HERO SECTION -->
+    <section class="bg-dark text-white text-center py-5">
+        <div class="container">
+            <h1 class="display-4 fw-bold">Client & Contact Hub</h1>
+            <p class="lead mt-3">
+                Smarter Client Management. Stronger Relationships.
+            </p>
+
+            <div class="mt-4">
+                <a asp-controller="Clients" asp-action="Index"
+                   class="btn btn-primary btn-lg me-2">
+                    Manage Clients
+                </a>
+
+                <a asp-controller="Contacts" asp-action="Index"
+                   class="btn btn-outline-light btn-lg">
+                    View Contacts
+                </a>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- FEATURES SECTION -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold">Everything You Need in One Place</h2>
+                <p class="text-muted">
+                    Streamline client and contact management with powerful tools.
+                </p>
+            </div>
+
+            <div class="row g-4">
+
+                <!-- Client Management -->
+                <div class="col-md-6">
+                    <div class="card shadow-sm h-100 border-0">
+                        <div class="card-body text-center">
+                            <div class="mb-3">
+                                <i class="bi bi-people-fill fs-1 text-primary"></i>
+                            </div>
+                            <h5 class="card-title fw-bold">Client Management</h5>
+                            <p class="card-text text-muted">
+                                View linked and pending clients, manage details,
+                                and keep all client information structured.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Organization -->
+                <div class="col-md-6">
+                    <div class="card shadow-sm h-100 border-0">
+                        <div class="card-body text-center">
+                            <div class="mb-3">
+                                <i class="bi bi-person-lines-fill fs-1 text-success"></i>
+                            </div>
+                            <h5 class="card-title fw-bold">Contact Organization</h5>
+                            <p class="card-text text-muted">
+                                Link contacts to clients, store communication
+                                details, and search instantly.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Real-Time Tracking -->
+                @* <div class="col-md-4">
+                    <div class="card shadow-sm h-100 border-0">
+                        <div class="card-body text-center">
+                            <div class="mb-3">
+                                <i class="bi bi-graph-up-arrow fs-1 text-danger"></i>
+                            </div>
+                            <h5 class="card-title fw-bold">Progress Tracking</h5>
+                            <p class="card-text text-muted">
+                                Monitor approvals, review pending clients,
+                                and stay informed with real-time updates.
+                            </p>
+                        </div>
+                    </div>
+                </div> *@
+
+            </div>
+        </div>
+    </section>
+
+</div>

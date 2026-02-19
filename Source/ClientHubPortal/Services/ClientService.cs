@@ -31,6 +31,49 @@ public class ClientService : IClientService
     }
 
 
+
+    public async Task<GenericResponse<List<ClientViewModel>>> GetContactClientsAsync(Guid contactId)
+    {
+        var response = await clientRepository.GetContactClientsAsync(contactId);
+        return new GenericResponse<List<ClientViewModel>>
+        {
+            Status = response.Status,
+            StatusCode = response.StatusCode,
+            StatusMessage = response.StatusMessage,
+            Data = !response.Data.Any() ? new List<ClientViewModel>() : response.Data.Select(s => new ClientViewModel()
+            {
+                Id = s.Id,
+                Name = s.Name,
+                NameCode = s.NameCode,
+                NoOfContacts = s.NoOfContacts,
+                CreatedAt = s.CreatedAt,
+                DeletedAt = s.DeletedAt,
+            }).ToList(),
+        };
+    }
+
+
+    public async Task<GenericResponse<List<ClientViewModel>>> GetUnlinkedClientssAsync(Guid contactId)
+    {
+        var response = await clientRepository.GetUnlinkedClientssAsync(contactId);
+        return new GenericResponse<List<ClientViewModel>>
+        {
+            Status = response.Status,
+            StatusCode = response.StatusCode,
+            StatusMessage = response.StatusMessage,
+            Data = !response.Data.Any() ? new List<ClientViewModel>() : response.Data.Select(s => new ClientViewModel()
+            {
+                Id = s.Id,
+                Name = s.Name,
+                NameCode = s.NameCode,
+                NoOfContacts = s.NoOfContacts,
+                CreatedAt = s.CreatedAt,
+                DeletedAt = s.DeletedAt,
+            }).ToList(),
+        };
+    }
+
+
     public async Task<GenericResponse<List<ClientViewModel>>> GetClientsAsync()
     {
         var response = await clientRepository.GetClientsAsync();
@@ -41,8 +84,8 @@ public class ClientService : IClientService
             StatusMessage = response.StatusMessage,
             Data = !response.Data.Any() ? new List<ClientViewModel>() : response.Data.Select(s => new ClientViewModel()
             {
-                Name = s.Name,
                 Id = s.Id,
+                Name = s.Name,
                 NameCode = s.NameCode,
                 NoOfContacts = s.NoOfContacts,
                 CreatedAt = s.CreatedAt,
@@ -68,6 +111,12 @@ public class ClientService : IClientService
         };
         return await clientRepository.CreateContactAsync(contact);
     }
+
+    public async Task<GenericResponse> DeleteContactAsync(Guid contactId)
+    {
+        return await clientRepository.DeleteContactAsync(contactId);
+    }
+
 
 
     public async Task<GenericResponse<List<ContactViewModel>>> GetContactsAsync()

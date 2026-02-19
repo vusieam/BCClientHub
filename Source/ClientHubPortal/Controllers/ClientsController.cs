@@ -72,6 +72,19 @@ public class ClientsController : Controller
 
 
 
+
+
+
+    [HttpGet]
+    public async Task<IActionResult> GetUnlinkedClients(Guid contactId)
+    {
+        var contacts = await clientService.GetUnlinkedClientssAsync(contactId);
+        ViewBag.ContactId = contactId;
+        return PartialView("_UnlinkedClientsModal", contacts.Data);
+    }
+
+
+
     [HttpGet]
     public IActionResult CreateClientModal()
     {

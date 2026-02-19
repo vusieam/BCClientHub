@@ -1,19 +1,18 @@
-﻿@model IEnumerable<ContactViewModel>
+﻿@model IEnumerable<ClientViewModel>
 
 @if (!Model.Any())
 {
-    @* <div class="alert alert-info">No contacts found.</div> *@
     <div class="text-center text-muted p-4"> No contacts found. </div>
 }
 else
 {
     <div class="card">
         <div class="card-body">
-            <table id="table1" class="table table-bordered table-striped">
+            <table id="table1" class="table table-bordered table-striped w-100">
                 <thead>
                     <tr class="align-middle text-start">
-                        <th>@Html.DisplayNameFor(model => model.Fullname)</th>
-                        <th>@Html.DisplayNameFor(model => model.EmailAddress)</th>
+                        <th>@Html.DisplayNameFor(model => model.Name)</th>
+                        <th>@Html.DisplayNameFor(model => model.NameCode)</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -21,11 +20,11 @@ else
                     @foreach (var client in Model)
                     {
                         <tr class="align-middle text-start">
-                            <td>@client.Fullname</td>
-                            <td>@client.EmailAddress</td>
+                            <td>@client.Name</td>
+                            <td>@client.NameCode</td>
                             <td>
                                 <button type="button" class="btn btn-danger btn-details me-2 mb-2 float-end"
-                                        onclick="deLinkContact('@client.ClientId', '@client.Id', this)" title="Delink contact">
+                                        onclick="deLinkClient('@client.Id', '@ViewBag.ContactId', this)" title="Delink contact">
                                     <span class="me-2">Delink</span>
                                     <i class="bx bx-trash bx-sm"></i>
                                 </button>

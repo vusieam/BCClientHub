@@ -9,7 +9,7 @@
     <div class="card-header">
         <h4 class="card-title align-middle mb-0 mt-2 fw-bold text-uppercase">List of Registered Clients</h4>
         <div class="float-end">
-            <button type="button" class="btn btn-sm btn-outline-warning me-3" onclick="history.back();">
+            <button type="button" class="btn btn-sm btn-outline-info me-3" onclick="history.back();">
                 <i class="bx bx-undo bx-sm me-1"></i>
                 <span class="me-1">Back</span>
             </button>
@@ -32,8 +32,8 @@
 
                 <thead>
                     <tr class="text-center text-uppercase">
-                        <th class="align-middle text-center">@Html.DisplayNameFor(model => model.Name)</th>
-                        <th class="align-middle text-center">@Html.DisplayNameFor(model => model.NameCode)</th>
+                        <th class="align-middle text-start">@Html.DisplayNameFor(model => model.Name)</th>
+                        <th class="align-middle text-start">@Html.DisplayNameFor(model => model.NameCode)</th>
                         <th class="align-middle text-center">@Html.DisplayNameFor(model => model.NoOfContacts)</th>
                         <th class="align-middle text-center" style="width:120px !important;" "">Options</th>
                     </tr>
@@ -102,6 +102,8 @@
             });
         });
 
+
+
         $(".btn-details").click(async function(e){
             e.preventDefault();
 
@@ -164,28 +166,64 @@
 
         function deleteClient(clientId, button) {
             debugger;
-            $.post('/Clients/DeleteClient',
-                { clientId: clientId},
-                function (response) {
-                    debugger;
-                    if (response.status) {
-                        Toast.fire({
-                            icon: "success",
-                            title: response.statusMessage
-                        });
-                        // var table = $('#table1').DataTable();
-                        // table
-                        //     .row($(button).closest('tr'))
-                        //     .remove()
-                        //     .draw();
+
+            Swal.fire({
+                    position: "top",
+                    title: 'ARE YOU SURE?',
+                    type: 'question',
+                    icon: 'question',
+                    html: 'You want to delete this client from the system.',
+                    iconColor: "#fe4d2e",
+                    width: 600,
+                    background: "#fafafa",
+                    confirmButtonColor: "#198754",
+                    cancelButtonColor: "#dc3545",
+                    showCancelButton: true,
+                    cancelButtonText: 'No, cancel',
+                    confirmButtonText: 'Yes, delete it!',
+                    allowOutsideClick: false,
+                    reverseButtons: true,
+                    customClass: {
+                        confirmButton: 'ms-5',
+                        cancelButton: 'me-5'
+                    },
+                    showClass: {
+                        popup: `
+                            animate__animated
+                            animate__fadeOutDown
+                            animate__faster
+                        `
+                    },
+                    hideClass: {
+                        popup: `
+                            animate__animated
+                            animate__fadeInUp
+                            animate__faster
+                        `
                     }
-                    else{
-                        Toast.fire({
-                            icon: "errror",
-                            title: response.statusMessage
+                }).then(async(result) => {
+                    debugger;
+                    if(result.isConfirmed){
+                        $.post('/Clients/DeleteClient',
+                        { clientId: clientId}, function (response) {
+                            debugger;
+                            if (response.status) {
+                                location.reload();
+                            }
+                            else{
+                                Toast.fire({
+                                    icon: "errror",
+                                    title: response.statusMessage
+                                });
+                            }
                         });
+
                     }
                 });
+
+            
         }
+
+
     </script>
 }

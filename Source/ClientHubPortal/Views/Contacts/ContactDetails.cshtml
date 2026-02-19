@@ -133,4 +133,133 @@
     </script>
 
 
+
+    <script>
+
+        const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.onmouseenter = Swal.stopTimer;
+                toast.onmouseleave = Swal.resumeTimer;
+            }
+        });
+
+        function openContactsModal(contactId) {
+            debugger;
+            $.get('/Clients/GetUnlinkedClients', { contactId: contactId }, function (data) {
+                $('#modalContainer').html(data);
+                const modalPage = document.getElementById('clientsModal');
+                var modal = new bootstrap.Modal(modalPage, {
+                    backdrop: 'static',   // prevents outside click closing
+                    keyboard: false       // prevents ESC closing
+                });
+                modal.show();
+
+                $('#table1').DataTable({
+                    destroy: true,
+                    responsive: true,
+                    autoWidth: false,
+                    // pageLength: 5,
+                    // lengthMenu: [5, 10, 25, 50],
+                    language: {
+                        emptyTable: `
+                            <div class="text-center p-4">
+                                <i class="bx bx-user-x bx-xl text-muted mb-2"></i>
+                                <div class="text-muted fw-semibold">
+                                    No unlinked clients available
+                                </div>
+                            </div>
+                        `,
+                        zeroRecords: "No matching clients found"
+                    },
+                    initComplete: function () {
+                        var api = this.api();
+
+                        if (api.data().count() === 0) {
+                            $('#table1 thead').hide();
+                            $('.dataTables_filter').hide();
+                            $('.dataTables_info').hide();
+                            $('.dataTables_paginate').hide();
+                            $('.dataTables_length').hide();
+                        }
+                    }
+                });
+            });
+        }
+
+
+
+        function linkClient(contactId, clientId, button) {
+            debugger;
+            $.post('/Contacts/LinkContact',
+                { clientId: clientId, contactId: contactId },
+                function (response) {
+                    debugger;
+                    if (response.status) {
+                        Toast.fire({
+                            icon: "success",
+                            title: response.statusMessage
+                        });
+                        // openContactsModal(clientId); // Refresh modal
+                        var table = $('#table1').DataTable();
+                        table
+                            .row($(button).closest('tr'))
+                            .remove()
+                            .draw();
+                    }
+                    else{
+                        Toast.fire({
+                            icon: "errror",
+                            title: response.statusMessage
+                        });
+                    }
+                });
+        }
+
+
+
+
+        function deLinkClient(clientId, contactId, button) {
+            debugger;
+            $.post('/Contacts/DeLinkContact',
+                { clientId: clientId, contactId: contactId },
+                function (response) {
+                    debugger;
+                    if (response.status) {
+                        Toast.fire({
+                            icon: "success",
+                            title: response.statusMessage
+                        });
+                        // openContactsModal(clientId); // Refresh modal
+                        var table = $('#table1').DataTable();
+                        table
+                            .row($(button).closest('tr'))
+                            .remove()
+                            .draw();
+                    }
+                    else{
+                        Toast.fire({
+                            icon: "errror",
+                            title: response.statusMessage
+                        });
+                    }
+                });
+        }
+
+
+
+        // Simple search filter
+        $(document).on("keyup", "#contactSearch", function () {
+            var value = $(this).val().toLowerCase();
+            $("#contactsTable tbody tr").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    </script>
+
+
 }

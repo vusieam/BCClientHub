@@ -1,0 +1,48 @@
+﻿<div class="modal fade" id="clientsModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title">Unlinked Clients</h5>
+                <button type="button" class="btn-close"
+                        data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body">
+               @*  @if (!Model.Any())
+                {
+                    <div class="text-center text-muted p-4"> No client(s) found.  </div>
+                }
+                else
+                { *@
+                    <table id="table1" class="table table-bordered table-striped w-100">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Name Code</th>
+                                <th width="120"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var contact in Model)
+                            {
+                                <tr>
+                                    <td>@contact.Name</td>
+                                    <td>@contact.NameCode</td>
+                                    <td>
+                                        <button class="btn btn-success btn-sm float-end"
+                                                onclick="linkClient('@ViewBag.ContactId', '@contact.Id', this)">
+                                            <span class="me-1 mt-1">Link</span>
+                                            <i class="bx bx-plug-connect  bx-sm"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                @* } *@
+            </div>
+
+        </div>
+    </div>
+</div>
