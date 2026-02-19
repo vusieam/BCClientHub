@@ -1,21 +1,19 @@
-# Binary City Client Hub
+# Client Hub
 A development practical test for client and contact information.
-
-## 🗓️ Delivery Target: 19 February 2026 at 08h00
 
 ## 🖥️ Screens
 
 ### 🏢 Clients Screen
 - View all registered clients
 - Add new client
-- Edit existing client details
+- Link existing contact to a client
 - Delete client
 - Search and filter clients
 
 ### 👤 Contacts Screen
 - View contacts linked to a client
 - Add new contact to a client
-- Edit contact details
+- link an existing client to a client
 - Delete contact
 - Filter contacts by client
 
@@ -33,7 +31,12 @@ A development practical test for client and contact information.
 - IIS
 - Docker
 - Any .NET-supported hosting environment
-
+  
+Before deployment or running the project you will only need to make adjustment to the appsettings.json file under the connectionstring and change the following:
+- YOUR_SERVER – Your SQL Server instance name
+- YOUR_DATABASE – Your database name
+- YOUR_DB_USER – Your database username with enough rights to create database.
+- YOUR_DB_PASSWORD – Your database password
 
 ## 🧑‍💻 Author
 Developed by Vusi Armstrong Malinga
