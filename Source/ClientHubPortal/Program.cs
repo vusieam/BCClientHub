@@ -26,8 +26,6 @@ builder.Services.AddSingleton<IClientService, ClientService>();
 
 builder.Services.AddControllersWithViews();
 
-
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -38,11 +36,11 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-
 var boostrapper = app.Services.GetRequiredService<BootstraperService>();
 await boostrapper.Migrations();
 
 app.UseHttpsRedirection();
+
 app.UseStaticFiles();
 
 app.UseRouting();

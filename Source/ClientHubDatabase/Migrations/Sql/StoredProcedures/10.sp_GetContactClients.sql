@@ -9,7 +9,7 @@ BEGIN
 
 	SELECT * 
 	FROM dbo.vw_AllContactClients C WITH(NOLOCK)
-	WHERE C.ContactId = @contactId
+	WHERE C.ContactId = @contactId AND C.DeletedAt IS NULL
 	ORDER BY C.[Name]
 
 END

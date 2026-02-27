@@ -11,7 +11,7 @@ BEGIN
 		SELECT DISTINCT C.Id AS [ClientId] 
 		FROM dbo.Clients C WITH(NOLOCK)
 		INNER JOIN dbo.ClientContacts CC WITH(NOLOCK) ON CC.ClientId = C.Id
-		WHERE CC.ContactId = @contactId
+		WHERE CC.ContactId = @contactId AND C.DeletedAt IS NULL
 	)
 	SELECT DISTINCT 
 			C.Id, 
@@ -21,5 +21,5 @@ BEGIN
 			C.CreatedAt,
 			C.DeletedAt
 	FROM dbo.vw_AllClients C WITH(NOLOCK)
-	WHERE C.Id NOT IN(SELECT cte.[ClientId] FROM cteLinkedClients cte)
+	WHERE C.Id NOT IN(SELECT cte.[ClientId] FROM cteLinkedClients cte) AND C.DeletedAt IS NULL
 END

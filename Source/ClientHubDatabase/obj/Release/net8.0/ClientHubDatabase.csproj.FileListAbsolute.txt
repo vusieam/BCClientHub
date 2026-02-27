@@ -1,0 +1,13 @@
+C:\DEV\Personal\Interview\BinaryCity\BCClientHub\Source\ClientHubDatabase\bin\Release\net8.0\ClientHubDatabase.deps.json
+C:\DEV\Personal\Interview\BinaryCity\BCClientHub\Source\ClientHubDatabase\bin\Release\net8.0\ClientHubDatabase.dll
+C:\DEV\Personal\Interview\BinaryCity\BCClientHub\Source\ClientHubDatabase\bin\Release\net8.0\ClientHubDatabase.pdb
+C:\DEV\Personal\Interview\BinaryCity\BCClientHub\Source\ClientHubDatabase\obj\Release\net8.0\ClientHubDatabase.csproj.AssemblyReference.cache
+C:\DEV\Personal\Interview\BinaryCity\BCClientHub\Source\ClientHubDatabase\obj\Release\net8.0\ClientHubDatabase.GeneratedMSBuildEditorConfig.editorconfig
+C:\DEV\Personal\Interview\BinaryCity\BCClientHub\Source\ClientHubDatabase\obj\Release\net8.0\ClientHubDatabase.AssemblyInfoInputs.cache
+C:\DEV\Personal\Interview\BinaryCity\BCClientHub\Source\ClientHubDatabase\obj\Release\net8.0\ClientHubDatabase.AssemblyInfo.cs
+C:\DEV\Personal\Interview\BinaryCity\BCClientHub\Source\ClientHubDatabase\obj\Release\net8.0\ClientHubDatabase.csproj.CoreCompileInputs.cache
+C:\DEV\Personal\Interview\BinaryCity\BCClientHub\Source\ClientHubDatabase\obj\Release\net8.0\ClientHubDatabase.sourcelink.json
+C:\DEV\Personal\Interview\BinaryCity\BCClientHub\Source\ClientHubDatabase\obj\Release\net8.0\ClientHubDatabase.dll
+C:\DEV\Personal\Interview\BinaryCity\BCClientHub\Source\ClientHubDatabase\obj\Release\net8.0\refint\ClientHubDatabase.dll
+C:\DEV\Personal\Interview\BinaryCity\BCClientHub\Source\ClientHubDatabase\obj\Release\net8.0\ClientHubDatabase.pdb
+C:\DEV\Personal\Interview\BinaryCity\BCClientHub\Source\ClientHubDatabase\obj\Release\net8.0\ref\ClientHubDatabase.dll

@@ -6,6 +6,7 @@ BEGIN
 
 	SELECT * 
 	FROM dbo.vw_AllClients C WITH(NOLOCK)
+	WHERE C.DeletedAt IS NULL
 	ORDER BY C.Name
 
 END
