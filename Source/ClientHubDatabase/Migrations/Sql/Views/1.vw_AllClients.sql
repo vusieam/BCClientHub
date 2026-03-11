@@ -2,7 +2,7 @@ CREATE OR ALTER VIEW dbo.vw_AllClients
 AS
 	SELECT	C.Id, 
 			C.Name, 
-			C.NameCode, 
+			C.Code, 
 			ISNULL(CCS.[TotalContacts], 0) AS [NoOfContacts],
 			C.CreatedAt,
 			C.DeletedAt

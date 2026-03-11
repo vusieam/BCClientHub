@@ -1,8 +1,4 @@
-﻿using ClientHubDatabase.Models;
-using ClientHubPortal.Models;
-using ClientHubPortal.Services;
-using Microsoft.AspNetCore.Identity;
-
+﻿
 namespace ClientHubPortal.Controllers;
 
 public class ClientsController : Controller

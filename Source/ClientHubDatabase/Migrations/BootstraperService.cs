@@ -1,7 +1,4 @@
-﻿using Dapper;
-using Microsoft.Extensions.Logging;
-
-namespace ClientHubDatabase.Migrations;
+﻿namespace ClientHubDatabase.Migrations;
 
 public class BootstraperService
 {

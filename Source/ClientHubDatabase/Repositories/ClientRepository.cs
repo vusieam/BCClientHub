@@ -1,9 +1,4 @@
-﻿using Microsoft.Data.SqlClient;
-using Microsoft.Extensions.Logging;
-using System.Data;
-using System.Net;
-
-namespace ClientHubDatabase.Repositories;
+﻿namespace ClientHubDatabase.Repositories;
 
 public class ClientRepository : IClientRepository
 {

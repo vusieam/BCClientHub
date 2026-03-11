@@ -4,10 +4,10 @@ BEGIN
     (
         Id UNIQUEIDENTIFIER NOT NULL DEFAULT NEWID(),
         Name NVARCHAR(255) NOT NULL,
-        NameCode NVARCHAR(255) DEFAULT NULL,
+        Code NVARCHAR(255) DEFAULT NULL,
         CreatedAt DATETIME NOT NULL DEFAULT GETDATE(),
         DeletedAt DATETIME DEFAULT NULL,
 		CONSTRAINT PK_Clients PRIMARY KEY CLUSTERED (Id ASC),
-        INDEX IX_Clients (Name, NameCode ASC, CreatedAt)
+        INDEX IX_Clients (Name, Code ASC, CreatedAt)
     )
 END

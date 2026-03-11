@@ -1,6 +1,4 @@
-﻿using ClientHubPortal.Services;
-
-namespace ClientHubPortal.Controllers;
+﻿namespace ClientHubPortal.Controllers;
 
 public class ContactsController : Controller
 {

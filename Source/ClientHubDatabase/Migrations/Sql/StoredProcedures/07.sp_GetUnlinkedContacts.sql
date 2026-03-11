@@ -29,10 +29,4 @@ BEGIN
 		WHERE CC.ContactId = C.Id
 	) AS CCS
 	WHERE C.Id NOT IN(SELECT cte.[ContactId] FROM cteLinkedContacts cte)
-
-
-	--SELECT C.* 
-	--FROM dbo.Contacts C WITH(NOLOCK)
-	--INNER JOIN dbo.ClientContacts CC WITH(NOLOCK) ON CC.ContactId = C.Id
-	--WHERE CC.ClientId <>@clientId
 END

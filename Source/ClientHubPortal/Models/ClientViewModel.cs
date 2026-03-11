@@ -9,7 +9,7 @@ public class ClientViewModel
     public string Name { get; set; }
 
     [Display(Name = "Client code")]
-    public string? NameCode { get; set; }
+    public string? ClientCode { get; set; }
 
     [Display(Name = "No. of linked contacts")]
     public int? NoOfContacts { get; set; }

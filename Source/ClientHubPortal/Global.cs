@@ -11,3 +11,9 @@ global using System.Linq;
 global using System.Text;
 global using System.Threading.Tasks;
 global using ClientHubPortal.Models.Clients;
+global using ClientHubPortal.Services;
+global using System.Diagnostics;
+global using ClientHubDatabase;
+global using ClientHubDatabase.Migrations;
+
+

@@ -5,5 +5,9 @@ global using System.Collections.Generic;
 global using System.Linq;
 global using System.Text;
 global using System.Threading.Tasks;
-
 global using ClientHubDatabase.Models;
+global using Microsoft.Data.SqlClient;
+global using Microsoft.Extensions.Configuration;
+global using System.Reflection;
+global using System.Data;
+global using System.Net;

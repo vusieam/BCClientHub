@@ -55,7 +55,7 @@ BEGIN
 				DECLARE @ClientCode VARCHAR(8) = @Prefix + FORMAT(@CurrentValue, 'D3')
 				
 
-				INSERT INTO dbo.Clients([Name], NameCode)
+				INSERT INTO dbo.Clients([Name], Code)
 				VALUES(@name, @ClientCode);
 
 				SET @status = 1

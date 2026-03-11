@@ -16,7 +16,7 @@ BEGIN
 	SELECT DISTINCT 
 			C.Id, 
 			C.Name, 
-			C.NameCode, 
+			C.Code, 
 			NoOfContacts,
 			C.CreatedAt,
 			C.DeletedAt

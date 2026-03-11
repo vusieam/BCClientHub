@@ -1,8 +1,3 @@
-using ClientHubDatabase;
-using ClientHubDatabase.Migrations;
-using ClientHubPortal.Services;
-using Microsoft.Data.SqlClient;
-using System.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -36,8 +31,8 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-var boostrapper = app.Services.GetRequiredService<BootstraperService>();
-await boostrapper.Migrations();
+var bootstrapper = app.Services.GetRequiredService<BootstraperService>();
+await bootstrapper.Migrations();
 
 app.UseHttpsRedirection();
 

@@ -44,7 +44,7 @@ public class ClientService : IClientService
             {
                 Id = s.Id,
                 Name = s.Name,
-                NameCode = s.NameCode,
+                ClientCode = s.Code,
                 NoOfContacts = s.NoOfContacts,
                 CreatedAt = s.CreatedAt,
                 DeletedAt = s.DeletedAt,
@@ -65,7 +65,7 @@ public class ClientService : IClientService
             {
                 Id = s.Id,
                 Name = s.Name,
-                NameCode = s.NameCode,
+                ClientCode = s.Code,
                 NoOfContacts = s.NoOfContacts,
                 CreatedAt = s.CreatedAt,
                 DeletedAt = s.DeletedAt,
@@ -86,7 +86,7 @@ public class ClientService : IClientService
             {
                 Id = s.Id,
                 Name = s.Name,
-                NameCode = s.NameCode,
+                ClientCode = s.Code,
                 NoOfContacts = s.NoOfContacts,
                 CreatedAt = s.CreatedAt,
                 DeletedAt = s.DeletedAt,
