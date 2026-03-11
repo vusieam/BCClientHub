@@ -28,12 +28,12 @@
         {
             <table id="table1" class="table table-bordered table-striped">
                 <thead>
-                    <tr class="text-center text-uppercase">
+                    <tr class="text-center">
                         <th class="align-middle text-start">@Html.DisplayNameFor(model => model.Name)</th>
                         <th class="align-middle text-start">@Html.DisplayNameFor(model => model.Surname)</th>
                         <th class="align-middle text-start">@Html.DisplayNameFor(model => model.EmailAddress)</th>
                         <th>@Html.DisplayNameFor(model => model.NoOfClients)</th>
-                        <th style="max-width:200px !important;">Options</th>
+                        <th style="max-width:200px !important;"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -104,6 +104,9 @@
 
 
         $("#table1").DataTable({
+            "columnDefs":[{
+                "targets": -1, "orderable": false
+            }],
             "responsive": true, "lengthChange": true, "autoWidth": true, "paging": true, "ordering": true,
             "info": true, "pageLength": 10, "lengthMenu": [5, 10, 25, 50],
             "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]

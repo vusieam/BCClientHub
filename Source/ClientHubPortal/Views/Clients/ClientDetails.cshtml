@@ -97,6 +97,9 @@
                         target.innerHTML = html;
                         if(targetSelector === "#contactsTab"){
                             $("#table1").DataTable({
+                                "columnDefs":[{
+                                    "targets": -1, "orderable": false
+                                }],
                                 "responsive": true, "lengthChange": true, "autoWidth": true, "paging": true, "ordering": true,
                                 "info": true, "pageLength": 5, "lengthMenu": [5, 10, 25, 50],
                             }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
@@ -125,6 +128,9 @@
 
 
         $("#table1").DataTable({
+            "columnDefs":[{
+                "targets": -1, "orderable": false
+            }],
             "responsive": true, "lengthChange": true, "autoWidth": true, "paging": true, "ordering": true,
             "info": true, "pageLength": 10, "lengthMenu": [5, 10, 25, 50],
         }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');  
@@ -156,12 +162,15 @@
                     backdrop: 'static',  
                     keyboard: false
                 });
-                modal.show();
 
-                $('#table1').DataTable({
+                $('#tableContactsModal').DataTable({
                     destroy: true,
                     responsive: true,
                     autoWidth: false,
+                    columnDefs:[{
+                        targets: -1,
+                        orderable: false
+                    }],
                     language: {
                         emptyTable: `
                             <div class="text-center p-4">
@@ -177,7 +186,7 @@
                         var api = this.api();
 
                         if (api.data().count() === 0) {
-                            $('#table1 thead').hide();
+                            $('#tableContactsModal thead').hide();
                             $('.dataTables_filter').hide();
                             $('.dataTables_info').hide();
                             $('.dataTables_paginate').hide();
@@ -185,6 +194,7 @@
                         }
                     }
                 });
+                modal.show();
 
             });
         }
@@ -199,9 +209,9 @@
                         Toast.fire({
                             icon: "success",
                             title: response.statusMessage
-                        });                        
+                        });
 
-                        var table = $('#table1').DataTable();
+                        var table = $('#tableContactsModal').DataTable();
                         table
                             .row($(button).closest('tr'))
                             .remove()

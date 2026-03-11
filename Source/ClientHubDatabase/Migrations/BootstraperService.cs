@@ -29,6 +29,7 @@ public class BootstraperService
         await database.EnableSnapshotIsolation();
         await database.EnableReadCommittedSnapshot();
         await MigrateAllTablesAsync();
+        await MigrateAllFunctionsAsync();
         await MigrateAllTriggersAsync();
         await MigrateAllSeedersAsync();
         await MigrateAllViewsAsync();
@@ -75,6 +76,45 @@ public class BootstraperService
         }
         await db.CloseAsync();
         logger.LogInformation("[SUCCESS] tables migration completed.");
+    }
+
+
+
+
+    private async Task MigrateAllFunctionsAsync()
+    {
+        var functions = sqlFileProvider.GetAll("functions");
+        logger.LogInformation($"Starting functions migration... Found {functions.Count} file(s).");
+        if (!functions.Any())
+            return;
+        using var db = database.CreateSqlConnection();
+        await db.OpenAsync();
+        functions = functions.OrderBy(o => o.Key).ToDictionary();
+        foreach (var kv in functions)
+        {
+            var fileName = kv.Key;
+            var sqlQuery = kv.Value;
+
+            if (string.IsNullOrWhiteSpace(sqlQuery) || sqlQuery.TrimStart().StartsWith("--"))
+            {
+                logger.LogInformation($"[SKIP] Skipping empty or comment-only file: {fileName}");
+                continue;
+            }
+
+            try
+            {
+                logger.LogInformation($"[EXEC] Executing {fileName}...");
+                await db.ExecuteAsync(sql: sqlQuery, commandTimeout: 0, commandType: System.Data.CommandType.Text);
+                logger.LogInformation($"[DONE] Successfully executed {fileName}");
+            }
+            catch (Exception fileEx)
+            {
+                logger.LogError($"[ERROR] Failed to execute {fileName}: {fileEx.Message}");
+                throw new Exception($"Error executing SQL file: {fileName}", fileEx);
+            }
+        }
+        await db.CloseAsync();
+        logger.LogInformation("[SUCCESS] functions migration completed.");
     }
 
 

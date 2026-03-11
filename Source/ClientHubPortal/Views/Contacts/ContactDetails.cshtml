@@ -96,6 +96,9 @@
                         target.innerHTML = html;
                         if(targetSelector === "#clientsTab"){
                             $("#table1").DataTable({
+                                "columnDefs":[{
+                                    "targets": -1, "orderable": false
+                                }],
                                 "responsive": true, "lengthChange": true, "autoWidth": true, "paging": true, "ordering": true,
                                 "info": true, "pageLength": 5, "lengthMenu": [5, 10, 25, 50],
                             }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
@@ -126,6 +129,9 @@
 
 
         $("#table1").DataTable({
+            "columnDefs":[{
+                "targets": -1, "orderable": false
+            }],
             "responsive": true, "lengthChange": true, "autoWidth": true, "paging": true, "ordering": true,
             "info": true, "pageLength": 10, "lengthMenu": [5, 10, 25, 50],
         }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
@@ -157,12 +163,15 @@
                     backdrop: 'static',   // prevents outside click closing
                     keyboard: false       // prevents ESC closing
                 });
-                modal.show();
 
-                $('#table1').DataTable({
+                $('#tableClientsModal').DataTable({
                     destroy: true,
                     responsive: true,
                     autoWidth: false,
+                    columnDefs:[{
+                        targets: -1, 
+                        orderable: false
+                    }],
                     // pageLength: 5,
                     // lengthMenu: [5, 10, 25, 50],
                     language: {
@@ -180,7 +189,7 @@
                         var api = this.api();
 
                         if (api.data().count() === 0) {
-                            $('#table1 thead').hide();
+                            $('#tableClientsModal thead').hide();
                             $('.dataTables_filter').hide();
                             $('.dataTables_info').hide();
                             $('.dataTables_paginate').hide();
@@ -188,6 +197,8 @@
                         }
                     }
                 });
+
+                modal.show();
             });
         }
 
@@ -205,7 +216,7 @@
                             title: response.statusMessage
                         });
                         // openContactsModal(clientId); // Refresh modal
-                        var table = $('#table1').DataTable();
+                        var table = $('#tableClientsModal').DataTable();
                         table
                             .row($(button).closest('tr'))
                             .remove()

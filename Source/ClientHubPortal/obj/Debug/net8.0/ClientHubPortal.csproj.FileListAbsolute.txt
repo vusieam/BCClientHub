@@ -167,10 +167,10 @@ C:\DEV\Personal\Interview\BinaryCity\BCClientHub\Source\ClientHubPortal\obj\Debu
 C:\DEV\Personal\Interview\BinaryCity\BCClientHub\Source\ClientHubPortal\obj\Debug\net8.0\staticwebassets.build.json.cache
 C:\DEV\Personal\Interview\BinaryCity\BCClientHub\Source\ClientHubPortal\obj\Debug\net8.0\staticwebassets.development.json
 C:\DEV\Personal\Interview\BinaryCity\BCClientHub\Source\ClientHubPortal\obj\Debug\net8.0\staticwebassets.build.endpoints.json
-C:\DEV\Personal\Interview\BinaryCity\BCClientHub\Source\ClientHubPortal\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 C:\DEV\Personal\Interview\BinaryCity\BCClientHub\Source\ClientHubPortal\obj\Debug\net8.0\ClientHu.99AA8819.Up2Date
 C:\DEV\Personal\Interview\BinaryCity\BCClientHub\Source\ClientHubPortal\obj\Debug\net8.0\ClientHubPortal.dll
 C:\DEV\Personal\Interview\BinaryCity\BCClientHub\Source\ClientHubPortal\obj\Debug\net8.0\refint\ClientHubPortal.dll
 C:\DEV\Personal\Interview\BinaryCity\BCClientHub\Source\ClientHubPortal\obj\Debug\net8.0\ClientHubPortal.pdb
 C:\DEV\Personal\Interview\BinaryCity\BCClientHub\Source\ClientHubPortal\obj\Debug\net8.0\ClientHubPortal.genruntimeconfig.cache
 C:\DEV\Personal\Interview\BinaryCity\BCClientHub\Source\ClientHubPortal\obj\Debug\net8.0\ref\ClientHubPortal.dll
+C:\DEV\Personal\Interview\BinaryCity\BCClientHub\Source\ClientHubPortal\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Migrations\Sql\Functions\01.svf_GenerateClientCode.sql" />
     <EmbeddedResource Include="Migrations\Sql\StoredProcedures\10.sp_GetContactClients.sql" />
     <EmbeddedResource Include="Migrations\Sql\StoredProcedures\9.sp_GetUnlinkedClients.sql" />
     <EmbeddedResource Include="Migrations\Sql\StoredProcedures\8.sp_DeLinkContact.sql" />
@@ -30,11 +31,11 @@
     <EmbeddedResource Include="Migrations\Sql\StoredProcedures\2.sp_GetClients.sql" />
     <EmbeddedResource Include="Migrations\Sql\StoredProcedures\1.sp_CreateClient.sql" />
     <EmbeddedResource Include="Migrations\Sql\Tables\01.Statuses.sql" />
+    <EmbeddedResource Include="Migrations\Sql\Tables\06.ClientCodeSequences.sql" />
     <EmbeddedResource Include="Migrations\Sql\Tables\05.ClientCodeSequence.sql" />
     <EmbeddedResource Include="Migrations\Sql\Tables\04.ClientContacts.sql" />
     <EmbeddedResource Include="Migrations\Sql\Tables\03.Contacts.sql" />
     <EmbeddedResource Include="Migrations\Sql\Tables\02.Clients.sql" />
-    <EmbeddedResource Include="Migrations\Sql\Triggers\01.trg_generate_client_code.sql" />
     <EmbeddedResource Include="Migrations\Sql\Views\4.vw_AllContactClients.sql" />
     <EmbeddedResource Include="Migrations\Sql\Views\3.vw_AllClientContacts.sql" />
     <EmbeddedResource Include="Migrations\Sql\Views\2.vw_AllContacts.sql" />
